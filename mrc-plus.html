@@ -84,6 +84,14 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
   <p>Kendi kataloğunu oluştur, kaynaklarını yönet ve Safari uyumlu videolarını oynat.</p>
   <button class="primary" onclick="openAdd()">İçerik eklemeye başla</button>
  </section>
+ <section class="panel" style="background:#1b1b27;border:1px solid #343447;border-radius:16px;padding:16px;margin:14px 0">
+  <div class="heading"><h2>Safari'de oynatılabilen ücretsiz filmler</h2></div>
+  <p class="muted">Internet Archive'de açık kamu malı veya CC0 lisanslı MP4 filmleri ara.</p>
+  <input id="archiveQueryStatic" class="search" placeholder="Film adı yaz..." style="margin:0 0 10px">
+  <button class="primary" id="archiveSearchStatic" style="width:100%">Ücretsiz yasal filmleri ara</button>
+  <div id="archiveResultsStatic" class="grid" style="margin-top:14px"></div>
+  <video id="archivePlayerStatic" controls playsinline webkit-playsinline style="display:none;width:100%;margin-top:14px;border-radius:12px;background:#000"></video>
+ </section>
  <div class="heading">
   <h2 id="sectionTitle">Keşfet</h2>
   <span class="muted" id="count"></span>
@@ -652,6 +660,53 @@ function renderCloudRepos(){
 }
 
 render();
+
+</script>
+<script>
+(function(){
+ const btn=document.getElementById("archiveSearchStatic");
+ const input=document.getElementById("archiveQueryStatic");
+ const results=document.getElementById("archiveResultsStatic");
+ const player=document.getElementById("archivePlayerStatic");
+ const licenseOK=u=>typeof u==="string"&&/creativecommons\.org\/publicdomain\/(zero|mark)\/1\.0/i.test(u);
+ btn.addEventListener("click",async function(){
+  const q=input.value.trim();
+  if(!q){results.textContent="Önce film adı yaz.";return;}
+  btn.disabled=true;results.textContent="Yasal film arşivi aranıyor…";player.pause();player.style.display="none";player.removeAttribute("src");
+  try{
+   const params=new URLSearchParams({q:'mediatype:movies AND title:"'+q.replace(/[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ ]/g," ")+'"',rows:"20",page:"1",output:"json"});
+   ["identifier","title","year"].forEach(k=>params.append("fl[]",k));
+   const response=await fetch("https://archive.org/advancedsearch.php?"+params.toString());
+   if(!response.ok)throw Error("Arşiv yanıt vermedi");
+   const data=await response.json(),docs=data.response?.docs||[];
+   if(!docs.length){results.textContent="Eşleşen film bulunamadı.";return;}
+   results.textContent="Lisans ve MP4 dosyaları doğrulanıyor…";
+   const found=(await Promise.all(docs.slice(0,15).map(async d=>{
+    try{
+     const response=await fetch("https://archive.org/metadata/"+encodeURIComponent(d.identifier));
+     if(!response.ok)return null;
+     const meta=await response.json(),lic=meta.metadata?.licenseurl;
+     if(!licenseOK(lic))return null;
+     const file=(meta.files||[]).filter(f=>f.name&&/\.mp4$/i.test(f.name)&&Number(f.size||0)>1000000).sort((a,b)=>Number(b.size||0)-Number(a.size||0))[0];
+     if(!file)return null;
+     return {id:d.identifier,title:meta.metadata?.title||d.title||d.identifier,year:meta.metadata?.year||d.year||"",file:file.name};
+    }catch(e){return null;}
+   }))).filter(Boolean);
+   results.innerHTML="";
+   if(!found.length){results.textContent="Bu aramada açık lisansı ve Safari uyumlu MP4 dosyası doğrulanmış film bulunamadı.";return;}
+   found.forEach(f=>{
+    const card=document.createElement("div");card.className="item";
+    const title=document.createElement("h3");title.textContent=f.title;
+    const year=document.createElement("p");year.className="muted";year.textContent=(f.year||"Yıl belirtilmemiş")+" • Kamu malı / CC0";
+    const play=document.createElement("button");play.className="primary";play.textContent="▶ Safari'de oynat";play.style.width="100%";
+    play.addEventListener("click",()=>{player.src="https://archive.org/download/"+encodeURIComponent(f.id)+"/"+f.file.split("/").map(encodeURIComponent).join("/");player.style.display="block";player.load();player.play().catch(()=>{});});
+    const link=document.createElement("a");link.href="https://archive.org/details/"+encodeURIComponent(f.id);link.target="_blank";link.rel="noopener";link.textContent="Kaynak ve lisans";link.style.display="block";link.style.marginTop="8px";link.style.color="#ff9aaa";
+    card.append(title,year,play,link);results.appendChild(card);
+   });
+  }catch(e){results.textContent="Arşiv bağlantısında sorun oluştu. Biraz sonra tekrar dene.";}
+  finally{btn.disabled=false;}
+ });
+})();
 </script>
 </body>
 </html>
