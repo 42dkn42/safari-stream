@@ -231,6 +231,39 @@ function showDetail(id){
   });
   const add=document.createElement("button");add.className="primary";add.textContent="+ Bölüm ekle";add.onclick=()=>addEpisode(id);c.append(add);
  }
+if(x.type==="series" && x.tvmazeId){
+ const auto=document.createElement("div");
+ const heading=document.createElement("h3");
+ heading.textContent="İnternetten Sezon ve Bölümler";
+ auto.append(heading);
+ c.append(auto);
+
+ fetch("https://api.tvmaze.com/shows/"+x.tvmazeId+"/episodes")
+ .then(r=>{if(!r.ok)throw Error();return r.json();})
+ .then(eps=>{
+  if(!eps.length){
+   auto.append("Bölüm bilgisi bulunamadı.");
+   return;
+  }
+  const seasons={};
+  eps.forEach(ep=>{
+   const season=ep.season||0;
+   if(!seasons[season])seasons[season]=[];
+   seasons[season].push(ep);
+  });
+  Object.keys(seasons).sort((a,b)=>Number(a)-Number(b)).forEach(season=>{
+   const h=document.createElement("h4");
+   h.textContent="Sezon "+season;
+   auto.append(h);
+   seasons[season].forEach(ep=>{
+    const p=document.createElement("p");
+    p.textContent="Bölüm "+(ep.number||"?")+" — "+ep.name+(ep.airdate?" ("+ep.airdate+")":"");
+    auto.append(p);
+   });
+  });
+ })
+ .catch(()=>auto.append("Bölüm bilgileri şu anda alınamadı."));
+}
  document.getElementById("detailModal").classList.add("show");
 }
 function validUrl(s){try{let u=new URL(s);return u.protocol==="https:"||u.protocol==="http:";}catch(e){return false;}}
