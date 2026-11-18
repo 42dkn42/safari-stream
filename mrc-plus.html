@@ -137,7 +137,7 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
   <button class="close" onclick="stopPlayer()">✕</button>
   <h2 id="playerTitle">Oynatıcı</h2>
   <video id="player" class="player" controls playsinline webkit-playsinline></video>
-  <p class="muted">Oynatma için Safari uyumlu doğrudan video adresi gerekir.</p>
+  <p id="playerStatus" class="muted">Safari uyumlu MP4 video adresiyle oynatılır. Yayın kaynağının kullanım iznine dikkat edin.</p>
  </div>
 </div>
 
@@ -310,7 +310,7 @@ function playVideo(title,url,id){
  if(!validUrl(url)){alert("Video adresi geçerli değil.");return;}
  if(id){history=[id,...history.filter(a=>a!==id)].slice(0,50);save();render();}
  const p=document.getElementById("player");document.getElementById("playerTitle").textContent=title;
- p.src=url;p.load();closeModal("detailModal");document.getElementById("playerModal").classList.add("show");p.play().catch(()=>{});
+ const status=document.getElementById("playerStatus");if(status)status.textContent="Yayın yükleniyor…";p.onerror=()=>{if(status)status.textContent="Bu dosya Safari tarafından oynatılamadı veya yayın erişime kapalı. Başka bir kaynak deneyin.";};p.src=url;p.load();closeModal("detailModal");document.getElementById("playerModal").classList.add("show");p.play().catch(()=>{if(status)status.textContent="Oynatmak için oynat düğmesine dokunun. Yayın başlamazsa kaynak bu cihazla uyumlu olmayabilir.";});
 }
 function stopPlayer(){const p=document.getElementById("player");p.pause();p.removeAttribute("src");p.load();closeModal("playerModal");}
 function openAdd(){document.getElementById("addModal").classList.add("show");}
@@ -348,9 +348,10 @@ function exportCatalog(){
   <button class="primary" id="searchShows">Dizi ara</button>
   <button class="primary" id="searchMovies">Film ara</button>
   <button class="primary" id="searchAnime">Anime ara</button>
+  <button id="searchArchive">Ücretsiz yasal filmler</button>
  </div>
  <div id="onlineResults" class="grid"></div>
- <p class="muted">Sonuçlar katalog bilgisi ve afiş sağlar. Video yayını sağlamaz.</p>`;
+ <p class="muted">Dizi/anime araması katalog bilgisi sağlar. Ücretsiz yasal arşiv bölümündeki uygun lisanslı filmler doğrudan oynatılabilir.</p>`;
  main.insertBefore(section,main.querySelector(".notice"));
 
  const input=section.querySelector("#onlineSearch");
@@ -502,6 +503,56 @@ async function searchMovies(){
   results.textContent="Film kataloğuna ulaşılamadı. Daha sonra tekrar dene.";
  }
 }
+
+
+ // Internet Archive: yalnızca açıkça kamu malı veya CC0 lisanslı filmler
+ async function searchArchive(){
+  const q=input.value.trim();
+  if(!q){results.textContent="Arşivde aramak istediğin film adını yaz.";return;}
+  results.textContent="Kamu malı film arşivi aranıyor…";
+  const allowedLicense=u=>typeof u==="string"&&(/creativecommons\\.org\\/publicdomain\\/(zero|mark)\\/1\\.0/i.test(u));
+  try{
+   const params=new URLSearchParams({q:'mediatype:movies AND title:"'+q.replace(/[\\\"\\+\\-!(){}\\[\\]^~*?:\\/]/g," ")+'"',rows:"18",page:"1",output:"json"});
+   ["identifier","title","year","description"].forEach(f=>params.append("fl[]",f));
+   params.append("sort[]","downloads desc");
+   const sr=await fetch("https://archive.org/advancedsearch.php?"+params.toString(),{credentials:"omit"});
+   if(!sr.ok)throw new Error("Arşiv araması başarısız ("+sr.status+")");
+   const data=await sr.json();
+   const docs=(data.response&&data.response.docs)||[];
+   if(!docs.length){results.textContent="Bu adla eşleşen arşiv filmi bulunamadı.";return;}
+   results.textContent="Yayın ve lisans bilgileri kontrol ediliyor…";
+   const checked=await Promise.all(docs.slice(0,12).map(async item=>{
+    try{
+     const mr=await fetch("https://archive.org/metadata/"+encodeURIComponent(item.identifier),{credentials:"omit"});
+     if(!mr.ok)return null;
+     const md=await mr.json();
+     const lic=md.metadata&&md.metadata.licenseurl;
+     if(!allowedLicense(lic))return null;
+     const files=(md.files||[]).filter(f=>f.name&&/\\.mp4$/i.test(f.name)&&!f.name.startsWith("__")&&Number(f.size||0)>1000000);
+     files.sort((a,b)=>Number(b.size||0)-Number(a.size||0));
+     if(!files.length)return null;
+     return {id:item.identifier,title:(md.metadata.title||item.title||item.identifier),year:md.metadata.year||item.year||"",license:lic,file:files[0].name,description:md.metadata.description||item.description||""};
+    }catch(e){return null;}
+   }));
+   const playable=checked.filter(Boolean);
+   results.innerHTML="";
+   if(!playable.length){results.textContent="Eşleşme bulundu ancak açık kamu malı/CC0 lisansı ve Safari uyumlu MP4 dosyası doğrulanamadı.";return;}
+   playable.forEach(item=>{
+    const card=document.createElement("div");card.className="item";
+    const poster=document.createElement("div");poster.className="poster";
+    const img=document.createElement("img");img.src="https://archive.org/services/img/"+encodeURIComponent(item.id);img.alt=item.title;img.onerror=()=>img.remove();poster.appendChild(img);
+    const ph=document.createElement("div");ph.className="placeholder";ph.textContent=item.title;poster.appendChild(ph);
+    const title=document.createElement("h3");title.textContent=item.title;
+    const year=document.createElement("small");year.textContent=item.year||"Tarih belirtilmemiş";
+    const license=document.createElement("p");license.className="muted";license.textContent="Lisans: kamu malı / CC0";
+    const play=document.createElement("button");play.className="primary";play.style.width="100%";play.textContent="▶ Safari'de oynat";
+    play.onclick=()=>playVideo(item.title,"https://archive.org/download/"+encodeURIComponent(item.id)+"/"+item.file.split("/").map(encodeURIComponent).join("/"));
+    const detail=document.createElement("a");detail.href="https://archive.org/details/"+encodeURIComponent(item.id);detail.target="_blank";detail.rel="noopener";detail.textContent="Arşiv kaynağı ve lisans";detail.style.display="inline-block";detail.style.marginTop="8px";detail.style.color="#ff9aaa";
+    card.append(poster,title,year,license,play,detail);results.appendChild(card);
+   });
+  }catch(e){results.textContent="Yasal arşive ulaşılamadı. Bağlantıyı kontrol edip tekrar dene.";}
+ }
+ section.querySelector("#searchArchive").onclick=searchArchive;
 
  section.querySelector("#searchAnime").onclick=searchAnime;
 section.querySelector("#searchMovies").onclick=searchMovies;
