@@ -1,202 +1,72 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090d18">
-<title>Safari Stream 4.0</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101018"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>MRC Stream • Safari</title><link rel="manifest" href="./manifest.webmanifest">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#090d18;color:#f4f5fa;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-header{padding:25px 18px;background:linear-gradient(130deg,#302064,#101b35)}
-h1{font-size:25px;margin:0}h1 span{color:#b4a0ff}
-header p,.muted{color:#aab5ca;font-size:12px}
-main{max-width:850px;margin:auto;padding:16px}
-.panel{background:#141e30;border:1px solid #2b3850;border-radius:15px;padding:15px;margin:13px 0}
-input,select{width:100%;padding:13px;border:1px solid #34415a;border-radius:10px;background:#0b1424;color:white;font-size:15px;margin:6px 0}
-button{border:0;border-radius:10px;padding:12px;background:#7658ef;color:white;font-weight:700;font-size:14px}
-.secondary{background:#25334b;color:white}
-.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.plugin{background:#141e30;border:1px solid #2b3850;border-radius:13px;padding:12px;min-width:0}
-.plugin h3{font-size:14px;margin:8px 0}
-.plugin p{font-size:12px;color:#aab5ca;line-height:1.5}
-.tag{display:inline-block;background:#30265a;color:#d3c8ff;padding:4px 8px;border-radius:20px;font-size:10px;margin:2px}
-.status{background:#0b1424;padding:11px;border-radius:10px;color:#bdc8dc;font-size:12px;line-height:1.5}
-.hidden{display:none}
-a{color:#bcaaff;overflow-wrap:anywhere}
-@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+:root{color-scheme:dark;--bg:#0d0d14;--panel:#191923;--panel2:#242432;--line:#343445;--txt:#f6f5fa;--muted:#aaa9ba;--accent:#e84b66;--ok:#39bd89}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:#101018ed;backdrop-filter:blur(18px);padding:13px 16px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;justify-content:space-between}.brand strong{font-size:22px;letter-spacing:-.8px}.brand b{color:var(--accent)}.sub{font-size:11px;color:var(--muted);margin-top:3px}
+main{max-width:950px;margin:auto;padding:16px}.tabs{display:flex;gap:8px;overflow:auto;padding:12px 15px;scrollbar-width:none}.tabs button,.chip{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:9px 13px}
+.tabs button.active,.chip.active{background:var(--accent);color:white;border-color:var(--accent)}
+input,select,textarea{width:100%;background:#11111a;color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:13px;font:inherit;outline:none}textarea{min-height:110px;resize:vertical}
+button{cursor:pointer;border:0;border-radius:11px;padding:11px 14px;background:var(--panel2);color:var(--txt);font-weight:650}button.primary{background:var(--accent);color:white}button:disabled{opacity:.5}
+.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.row .grow{flex:1}.stack{display:grid;gap:10px}.section{margin:18px 0}.section h2{font-size:18px;margin:0 0 11px}.muted{color:var(--muted);font-size:13px;line-height:1.5}.hero{background:linear-gradient(130deg,#3c1c2b,#202038);padding:20px;border-radius:18px;margin:5px 0 20px}.hero h1{font-size:25px;margin:5px 0 8px}.hero p{color:#ddd;font-size:13px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{min-width:0;background:var(--panel);border:1px solid #292938;border-radius:13px;padding:9px;overflow:hidden}.poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:#262635;border-radius:9px}.card h3{font-size:13px;line-height:1.3;margin:8px 0 4px}.card .muted{font-size:11px}.card button{width:100%;margin-top:8px;font-size:12px;padding:9px}
+.panel{background:var(--panel);border:1px solid var(--line);padding:14px;border-radius:15px;margin:10px 0}.itemrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);padding:12px;border-radius:12px;margin:8px 0}.itemrow .grow{min-width:0}.itemrow strong{font-size:14px}.itemrow button{white-space:nowrap}.badge{display:inline-block;background:#303041;color:#d6d4e1;border-radius:7px;padding:4px 7px;font-size:10px}.badge.ok{background:#153b30;color:#8ce0bd}.empty{text-align:center;padding:30px 12px;color:var(--muted);grid-column:1/-1}.bottom{position:fixed;bottom:0;left:0;right:0;z-index:6;display:flex;justify-content:space-around;background:#14141df2;border-top:1px solid var(--line);padding:9px 2px calc(9px + env(safe-area-inset-bottom));backdrop-filter:blur(18px)}.bottom button{background:none;color:var(--muted);font-size:11px;padding:7px 4px}.bottom button.active{color:#fff}
+.modal{display:none;position:fixed;inset:0;z-index:12;background:#000c;overflow:auto;padding:15px}.modal.show{display:block}.sheet{max-width:650px;margin:22px auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}.sheet h2{margin:5px 0 15px}.close{float:right}.fieldlabel{display:block;color:var(--muted);font-size:12px;margin:12px 0 5px}video{width:100%;max-height:55vh;background:#000;border-radius:12px;margin-top:10px}.footer{font-size:11px;color:var(--muted);line-height:1.5;margin-top:20px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 </style>
-</head>
-<body>
-<header>
-<h1>SAFARI <span>STREAM</span></h1>
-<p>CloudStream depo görüntüleyici • Sürüm 4.0</p>
-</header>
+</head><body>
+<header><div class="brand"><div><strong>MRC <b>STREAM</b></strong><div class="sub">Safari için web medya merkezi • v1.0</div></div><button onclick="openModal('settings')">⚙</button></div></header>
+<nav class="tabs" id="tabs"><button class="active" data-tab="home" onclick="tab('home')">Keşfet</button><button data-tab="search" onclick="tab('search')">Ara</button><button data-tab="repos" onclick="tab('repos')">Depolar</button><button data-tab="library" onclick="tab('library')">Kitaplığım</button></nav>
 <main>
-<section class="panel">
-<h2>CloudStream depoları</h2>
-<input id="repo" value="https://raw.githubusercontent.com/lepotane/MRC-builds/builds/repo.json">
-<div class="row">
-<button id="load">Depoyu yükle</button>
-<button class="secondary" id="refresh">Yenile</button>
-</div>
-<p class="muted">Depo manifesti okunur, ardından eklenti listesi alınır. Eklentiler Safari'de çalıştırılmaz.</p>
-<div id="status" class="status">MRC deposu yüklenmeye hazır.</div>
+<section id="home" class="view">
+ <div class="hero"><span class="badge">iPhone / Safari</span><h1>Tek yerde keşfet ve izle.</h1><p>Film, dizi ve anime kataloglarını keşfet; kullanım hakkına sahip olduğun doğrudan yayınları Safari oynatıcısında aç.</p><div class="row"><button class="primary" onclick="tab('search')">İçerik ara</button><button onclick="tab('repos')">Depo ekle</button></div></div>
+ <div class="section"><h2>Ücretsiz ve açık lisanslı filmler</h2><p class="muted">Internet Archive üzerinde kamu malı/CC0 lisansı ve MP4 dosyası doğrulanan kayıtlar.</p><div class="row"><input id="homeQ" class="grow" placeholder="Film adı yaz"><button class="primary" onclick="archiveSearch('homeQ','homeResults')">Ara</button></div><div id="homeResults" class="grid section"></div></div>
+ <div class="section"><h2>Son izlediklerin</h2><div id="recent"></div></div>
 </section>
-
-<section class="panel">
-<h2 id="repoTitle">Depo bilgileri</h2>
-<p id="repoDesc" class="muted">Henüz depo yüklenmedi.</p>
-<div class="row">
-<div class="status" id="count">Eklenti: 0</div>
-<div class="status" id="active">Durum: Bekliyor</div>
-</div>
+<section id="search" class="view" hidden>
+ <div class="section"><h2>İçerik keşfet</h2><input id="query" placeholder="Film, dizi veya anime adı"><div class="row" style="margin-top:9px;flex-wrap:wrap"><button class="primary" onclick="searchSeries()">Dizi ara</button><button class="primary" onclick="searchAnime()">Anime ara</button><button onclick="archiveSearch('query','results')">Açık lisanslı film ara</button></div><p class="muted">Dizi ve anime sonuçları bilgi/afiş/bölüm kataloğudur; yayın bağlantısı sağlamaz.</p><div id="results" class="grid"></div></div>
 </section>
-
-<section class="panel">
-<h2>Eklenti arama</h2>
-<input id="search" placeholder="Eklenti adı ara...">
-<select id="filter">
-<option value="all">Tüm kategoriler</option>
-<option value="Movie">Film</option>
-<option value="TvSeries">Dizi</option>
-<option value="Anime">Anime</option>
-<option value="Documentary">Belgesel</option>
-<option value="Live">Canlı yayın</option>
-<option value="Cartoon">Çizgi film</option>
-<option value="AsianDrama">Asya dizileri</option>
-</select>
-<select id="language">
-<option value="all">Tüm diller</option>
-<option value="tr">Türkçe</option>
-<option value="en">İngilizce</option>
-<option value="mx">Diğer</option>
-</select>
+<section id="repos" class="view" hidden>
+ <div class="section"><h2>Depo yöneticisi</h2><p class="muted">CloudStream uyumlu depo manifestlerini ekleyip kataloglarını görüntüleyebilirsin. Android .cs3 eklentileri Safari'de çalıştırılmaz; burada web eklentisi olarak yüklenmiş sayılmazlar.</p><div class="panel"><label class="fieldlabel">Depo manifest URL'si (repo.json)</label><input id="repoUrl" value="https://raw.githubusercontent.com/lepotane/MRC-builds/builds/repo.json"><button class="primary" style="width:100%;margin-top:9px" onclick="addRepo()">Depoyu ekle / yenile</button><div id="repoStatus" class="muted" style="margin-top:8px"></div></div><div id="repoList"></div><div class="panel"><h3>Web kaynakları</h3><p class="muted">Tarayıcıda çalışacak kaynak adaptörleri JavaScript ile ayrıca yazılır. Şimdilik doğrudan MP4/HLS adreslerini içeriklere ekleyebilirsin.</p><button onclick="openModal('sourceHelp')">Kaynak ekleme rehberi</button></div></div>
 </section>
-
-<h2>Depo eklentileri</h2>
-<div id="plugins" class="grid">
-<div class="status">Önce depoyu yükle.</div>
-</div>
-
-<section class="panel">
-<h3>Seçilen eklenti</h3>
-<div id="detail" class="muted">Bir eklenti seçilmedi.</div>
-</section>
-
-<section class="panel">
-<h3>Teknik bilgi</h3>
-<p class="muted">
-CloudStream depoları repo.json ve plugins.json manifestleri kullanır.
-Eklenti dosyaları .cs3 biçimindedir ve Android CloudStream API'sine göre hazırlanır.
-Safari bu eklentileri doğrudan çalıştıramaz. Bu uygulama depo bilgilerini görüntüler;
-eklenti kodunu yürütmez. Web uyumlu bir sürüm ayrıca geliştirilmelidir.
-</p>
-</section>
+<section id="library" class="view" hidden><div class="section"><h2>Kitaplığım</h2><div class="row"><button class="chip active" onclick="libraryMode='all';renderLibrary()">Tümü</button><button class="chip" onclick="libraryMode='fav';renderLibrary()">Favoriler</button><button class="chip" onclick="libraryMode='history';renderLibrary()">Geçmiş</button></div><div id="libraryList"></div><div class="panel"><h3>Kendi içeriğini ekle</h3><button class="primary" style="width:100%" onclick="openModal('add')">＋ Film / dizi ekle</button><button style="width:100%;margin-top:8px" onclick="openModal('m3u')">M3U canlı TV listesi içe aktar</button></div></div></section>
 </main>
+<nav class="bottom"><button class="active" data-bottom="home" onclick="tab('home')">⌂<br>Keşfet</button><button data-bottom="search" onclick="tab('search')">⌕<br>Ara</button><button data-bottom="repos" onclick="tab('repos')">▤<br>Depolar</button><button data-bottom="library" onclick="tab('library')">♡<br>Kitaplığım</button></nav>
+<div class="modal" id="detail"><div class="sheet"><button class="close" onclick="closeModal('detail')">✕</button><div id="detailBody"></div></div></div>
+<div class="modal" id="playerModal"><div class="sheet"><button class="close" onclick="stopPlayer()">✕</button><h2 id="playerTitle">Oynatıcı</h2><video id="video" controls playsinline webkit-playsinline></video><p class="muted" id="playerStatus">Safari uyumlu MP4/HLS doğrudan bağlantıları oynatılır.</p></div></div>
+<div class="modal" id="settings"><div class="sheet"><button class="close" onclick="closeModal('settings')">✕</button><h2>Ayarlar</h2><p class="muted">Verilerin bu cihazdaki Safari depolamasında tutulur.</p><button style="width:100%" onclick="exportData()">Yedek dışa aktar</button><label class="fieldlabel">Yedek dosyası</label><input type="file" id="backupFile" accept=".json,application/json"><button style="width:100%;margin-top:8px" onclick="importData()">Yedeği geri yükle</button><button style="width:100%;margin-top:8px" onclick="if(confirm('Tüm yerel veriler silinsin mi?')){localStorage.clear();location.reload()}">Yerel verileri sil</button><p class="footer">Bu uygulama içerik barındırmaz. Yalnızca erişim ve kullanım hakkına sahip olduğun yayınları ekle.</p></div></div>
+<div class="modal" id="add"><div class="sheet"><button class="close" onclick="closeModal('add')">✕</button><h2>Kitaplığa içerik ekle</h2><label class="fieldlabel">Ad</label><input id="addTitle" placeholder="Film veya dizi adı"><label class="fieldlabel">Tür</label><select id="addType"><option value="movie">Film</option><option value="series">Dizi</option><option value="anime">Anime</option><option value="live">Canlı TV</option></select><label class="fieldlabel">Afiş URL (isteğe bağlı)</label><input id="addPoster" placeholder="https://..."><label class="fieldlabel">Doğrudan MP4 / M3U8 URL (isteğe bağlı)</label><input id="addUrl" placeholder="https://..."><button class="primary" style="width:100%;margin-top:12px" onclick="saveItem()">Kaydet</button></div></div>
+<div class="modal" id="m3u"><div class="sheet"><button class="close" onclick="closeModal('m3u')">✕</button><h2>M3U liste içe aktar</h2><p class="muted">Yalnızca kullanma hakkına sahip olduğun kanal listelerini ekle.</p><input type="file" id="m3uFile" accept=".m3u,.m3u8,.txt"><textarea id="m3uText" placeholder="#EXTM3U&#10;#EXTINF:-1, Kanal adı&#10;https://...m3u8"></textarea><button class="primary" style="width:100%;margin-top:10px" onclick="importM3U()">Listeyi içe aktar</button><div id="m3uStatus" class="muted"></div></div></div>
+<div class="modal" id="sourceHelp"><div class="sheet"><button class="close" onclick="closeModal('sourceHelp')">✕</button><h2>Kaynak ekleme</h2><p class="muted">İçerik ayrıntısından “Kaynak ekle” seçeneğini kullan. URL, yayın dosyasına doğrudan erişmeli. Web sayfası adresi veya .cs3 uzantısı video URL'si değildir. Safari MP4 ve desteklenen HLS yayınlarını oynatabilir; CORS, codec, oturum ve DRM kısıtları oynatmayı engelleyebilir.</p></div></div>
 <script>
-const $=id=>document.getElementById(id);
-let plugins=[];
-let selected=null;
-
-function safeHttps(value){
-try{
-const u=new URL(value);
-return u.protocol==="https:"?u.href:null;
-}catch{return null}
-}
-function esc(s){
-return String(s??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
-}
-function types(p){
-return Array.isArray(p.tvTypes)?p.tvTypes:[];
-}
-function render(){
-const q=$("search").value.toLocaleLowerCase("tr");
-const f=$("filter").value;
-const lang=$("language").value;
-const list=plugins.filter(p=>{
-const name=String(p.name||p.internalName||"").toLocaleLowerCase("tr");
-return name.includes(q)&&
-(f==="all"||types(p).includes(f))&&
-(lang==="all"||p.language===lang);
-});
-$("plugins").innerHTML=list.length?list.map((p)=>{
-const index=plugins.indexOf(p);
-return `<article class="plugin">
-<span class="tag">${esc(p.language||"Dil belirtilmemiş")}</span>
-<h3>${esc(p.name||p.internalName||"İsimsiz eklenti")}</h3>
-<p>${esc(p.description||"Açıklama yok.")}</p>
-${types(p).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}
-<p>Versiyon: ${esc(p.version??"-")}</p>
-<button data-detail="${index}">Detayları gör</button>
-</article>`;
-}).join(""):'<div class="status">Bu filtrede eklenti bulunamadı.</div>';
-}
-async function loadRepository(){
-const repoUrl=safeHttps($("repo").value.trim());
-if(!repoUrl){$("status").textContent="Geçerli HTTPS depo adresi gir.";return}
-$("status").textContent="Depo manifesti okunuyor...";
-$("active").textContent="Durum: Yükleniyor";
-try{
-const response=await fetch(repoUrl);
-if(!response.ok)throw Error("Manifest HTTP "+response.status);
-const manifest=await response.json();
-if(!Array.isArray(manifest.pluginLists)||!manifest.pluginLists.length)
-throw Error("Manifest içinde pluginLists bulunamadı.");
-$("repoTitle").textContent=manifest.name||"CloudStream deposu";
-$("repoDesc").textContent=manifest.description||"";
-let all=[];
-for(const listUrl of manifest.pluginLists){
-const url=safeHttps(listUrl);
-if(!url)continue;
-const r=await fetch(url);
-if(!r.ok)throw Error("Eklenti listesi HTTP "+r.status);
-const data=await r.json();
-if(!Array.isArray(data))throw Error("Eklenti listesi beklenen biçimde değil.");
-all=all.concat(data);
-}
-plugins=all;
-$("count").textContent="Eklenti: "+plugins.length;
-$("active").textContent="Durum: Manifest okundu";
-$("status").textContent="Başarılı! "+plugins.length+" eklenti bilgisi yüklendi.";
-render();
-}catch(e){
-$("status").textContent="Yükleme başarısız: "+e.message+
-" | Sunucu CORS erişimine izin vermiyor olabilir.";
-$("active").textContent="Durum: Hata";
-}
-}
-function showDetail(index){
-const p=plugins[index];if(!p)return;
-selected=p;
-const url=safeHttps(p.url);
-$("detail").innerHTML=`
-<h3>${esc(p.name||p.internalName)}</h3>
-<p>${esc(p.description||"Açıklama yok.")}</p>
-<p>Dil: ${esc(p.language||"-")}<br>
-Sürüm: ${esc(p.version??"-")}<br>
-API sürümü: ${esc(p.apiVersion??"-")}<br>
-Türler: ${esc(types(p).join(", "))}<br>
-Dosya boyutu: ${esc(p.fileSize??"-")} bayt</p>
-<p>Uyumluluk: Android CloudStream eklentisi; Safari'de doğrudan çalışmaz.</p>
-${url?`<a href="${esc(url)}" target="_blank" rel="noopener">Orijinal .cs3 dosya adresini aç</a>`:"Geçerli eklenti adresi yok."}
-`;
-}
-$("load").addEventListener("click",loadRepository);
-$("refresh").addEventListener("click",loadRepository);
-$("search").addEventListener("input",render);
-$("filter").addEventListener("change",render);
-$("language").addEventListener("change",render);
-$("plugins").addEventListener("click",e=>{
-const b=e.target.closest("[data-detail]");
-if(b)showDetail(Number(b.dataset.detail));
-});
-loadRepository();
-</script>
-</body>
-</html>
+const K='mrcstream_v1';let db=JSON.parse(localStorage.getItem(K)||'{"items":[],"repos":[],"favorites":[],"history":[],"channels":[]}');let libraryMode='all';function save(){localStorage.setItem(K,JSON.stringify(db))}
+function tab(id){document.querySelectorAll('.view').forEach(x=>x.hidden=x.id!==id);document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));document.querySelectorAll('[data-bottom]').forEach(x=>x.classList.toggle('active',x.dataset.bottom===id));if(id==='library')renderLibrary();if(id==='home')renderRecent();if(id==='repos')renderRepos();window.scrollTo(0,0)}
+function openModal(id){document.getElementById(id).classList.add('show')}function closeModal(id){document.getElementById(id).classList.remove('show')}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function card(x){const el=document.createElement('article');el.className='card';el.innerHTML='<img class="poster" alt=""><h3></h3><div class="muted"></div><button class="primary">Ayrıntılar</button>';const im=el.querySelector('img');im.src=x.poster||'';im.onerror=()=>im.style.visibility='hidden';el.querySelector('h3').textContent=x.title;el.querySelector('.muted').textContent=[x.year,x.kind].filter(Boolean).join(' • ');el.querySelector('button').onclick=()=>detail(x);return el}
+function showCards(host,items){const h=document.getElementById(host);h.innerHTML='';if(!items.length){h.innerHTML='<div class="empty">Sonuç bulunamadı.</div>';return}items.forEach(x=>h.append(card(x)))}
+function detail(x){const b=document.getElementById('detailBody');b.innerHTML='';const title=document.createElement('h2');title.textContent=x.title;b.append(title);const p=document.createElement('p');p.className='muted';p.textContent=[x.kind,x.year].filter(Boolean).join(' • ');b.append(p);if(x.description){const d=document.createElement('p');d.className='muted';d.textContent=x.description;b.append(d)}const fav=document.createElement('button');fav.textContent=db.favorites.includes(x.id)?'♥ Favoriden çıkar':'♡ Favoriye ekle';fav.onclick=()=>{db.favorites=db.favorites.includes(x.id)?db.favorites.filter(i=>i!==x.id):[...db.favorites,x.id];save();fav.textContent=db.favorites.includes(x.id)?'♥ Favoriden çıkar':'♡ Favoriye ekle'};b.append(fav);const add=document.createElement('button');add.textContent='＋ Yayın kaynağı ekle';add.style.marginLeft='8px';add.onclick=()=>{const url=prompt('Doğrudan MP4 veya M3U8 adresi (yalnızca izinli yayın):');if(!url)return;if(!valid(url)){alert('Geçerli http/https URL gir.');return}x.sources=x.sources||[];x.sources.push({name:'Kaynak '+(x.sources.length+1),url});save();detail(x)};b.append(add);(x.sources||[]).forEach((s,i)=>{const row=document.createElement('div');row.className='itemrow';const n=document.createElement('strong');n.textContent=s.name;const play=document.createElement('button');play.className='primary';play.textContent='Oynat';play.onclick=()=>playVideo(x.title,s.url,x.id);row.append(n,play);b.append(row)});if(x.url){const play=document.createElement('button');play.className='primary';play.style.width='100%';play.style.marginTop='12px';play.textContent='▶ Oynat';play.onclick=()=>playVideo(x.title,x.url,x.id);b.append(play)}if(x.kind==='Dizi'&&x.tvmazeId){const ep=document.createElement('div');ep.className='section';ep.innerHTML='<h3>Sezonlar ve bölümler</h3><p class="muted">Bölüm bilgileri TVmaze kataloğundan alınır; yayın bağlantısı sağlamaz.</p>';b.append(ep);fetch('https://api.tvmaze.com/shows/'+x.tvmazeId+'/episodes').then(r=>r.json()).then(eps=>{const seasons={};eps.forEach(e=>(seasons[e.season]??=[]).push(e));Object.keys(seasons).sort((a,b)=>a-b).forEach(sn=>{const h=document.createElement('h4');h.textContent='Sezon '+sn;ep.append(h);seasons[sn].forEach(e=>{const r=document.createElement('div');r.className='itemrow';const n=document.createElement('span');n.textContent='Bölüm '+e.number+' · '+e.name;r.append(n);ep.append(r)})})}).catch(()=>{ep.append('Bölüm listesi alınamadı')})}openModal('detail')}
+function valid(u){try{const x=new URL(u);return ['https:','http:'].includes(x.protocol)}catch(e){return false}}
+function playVideo(title,url,id){if(!valid(url)){alert('Geçerli bir doğrudan yayın URL’si değil.');return}const v=document.getElementById('video');document.getElementById('playerTitle').textContent=title;const st=document.getElementById('playerStatus');st.textContent=/\.m3u8(?:$|[?#])/i.test(url)?'HLS yayını açılıyor…':'Video yükleniyor…';v.onerror=()=>st.textContent='Safari oynatamadı. Doğrudan MP4/HLS adresi, desteklenen codec ve yayın sunucusu erişimi gerekli.';v.onloadedmetadata=()=>st.textContent='Yayın yüklendi.';v.src=url;v.load();closeModal('detail');openModal('playerModal');v.play().catch(()=>st.textContent='Otomatik oynatma engellendi; videodaki oynat düğmesine dokun.')}
+function stopPlayer(){const v=document.getElementById('video');v.pause();v.removeAttribute('src');v.load();closeModal('playerModal')}
+function saveItem(){const title=document.getElementById('addTitle').value.trim(),url=document.getElementById('addUrl').value.trim(),poster=document.getElementById('addPoster').value.trim();if(!title){alert('Ad gerekli');return}if(url&&!valid(url)||poster&&!valid(poster)){alert('URL geçerli değil');return}db.items.unshift({id:'i'+Date.now(),title,kind:{movie:'Film',series:'Dizi',anime:'Anime',live:'Canlı TV'}[document.getElementById('addType').value],poster,url,sources:[]});save();closeModal('add');renderLibrary()}
+function renderLibrary(){const h=document.getElementById('libraryList');h.innerHTML='';let arr=db.items;if(libraryMode==='fav')arr=arr.filter(x=>db.favorites.includes(x.id));if(libraryMode==='history')arr=arr.filter(x=>db.history.includes(x.id));if(!arr.length){h.innerHTML='<div class="empty">Kitaplığın henüz boş.</div>';return}arr.forEach(x=>{const r=document.createElement('div');r.className='itemrow';const n=document.createElement('div');n.className='grow';n.innerHTML='<strong></strong><div class="muted"></div>';n.querySelector('strong').textContent=x.title;n.querySelector('.muted').textContent=x.kind;const b=document.createElement('button');b.textContent='Aç';b.onclick=()=>detail(x);r.append(n,b);h.append(r)})}
+function renderRecent(){const h=document.getElementById('recent');h.innerHTML='';const a=db.items.filter(x=>db.history.includes(x.id)).slice(0,6);if(!a.length){h.innerHTML='<p class="muted">Henüz izleme geçmişi yok.</p>';return}a.forEach(x=>{const r=document.createElement('div');r.className='itemrow';r.innerHTML='<strong></strong><button>Aç</button>';r.querySelector('strong').textContent=x.title;r.querySelector('button').onclick=()=>detail(x);h.append(r)})}
+function exportData(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='mrc-stream-yedek.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(){const f=document.getElementById('backupFile').files[0];if(!f)return alert('Önce yedek seç');f.text().then(t=>{const x=JSON.parse(t);if(!x||!Array.isArray(x.items))throw Error();db=x;save();location.reload()}).catch(()=>alert('Yedek dosyası okunamadı'))}
+async function searchSeries(){const q=document.getElementById('query').value.trim();if(!q)return alert('Dizi adı yaz');const h=document.getElementById('results');h.textContent='Diziler aranıyor…';try{const r=await fetch('https://api.tvmaze.com/search/shows?q='+encodeURIComponent(q));const d=await r.json();showCards('results',d.map(a=>({id:'tv'+a.show.id,title:a.show.name,kind:'Dizi',year:(a.show.premiered||'').slice(0,4),poster:a.show.image?.medium||'',description:(a.show.summary||'').replace(/<[^>]*>/g,' '),tvmazeId:a.show.id})));document.querySelectorAll('#results .card').forEach((c,i)=>c.querySelector('button').onclick=()=>{const a=d[i].show;const x={id:'tv'+a.id,title:a.name,kind:'Dizi',year:(a.premiered||'').slice(0,4),poster:a.image?.original||a.image?.medium||'',description:(a.summary||'').replace(/<[^>]*>/g,' '),tvmazeId:a.id};db.items.find(y=>y.id===x.id)||db.items.unshift(x);save();detail(x)})}catch(e){h.textContent='Dizi kataloğuna ulaşılamadı.'}}
+async function searchAnime(){const q=document.getElementById('query').value.trim();if(!q)return alert('Anime adı yaz');const h=document.getElementById('results');h.textContent='Animeler aranıyor…';try{const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:'query($s:String){Page(perPage:20){media(search:$s,type:ANIME){id title{english romaji}startDate{year}coverImage{large}description}}}',variables:{s:q}})});const d=await r.json();const list=d.data.Page.media.map(a=>({id:'an'+a.id,title:a.title.english||a.title.romaji,kind:'Anime',year:a.startDate.year||'',poster:a.coverImage.large||'',description:a.description||''}));showCards('results',list);document.querySelectorAll('#results .card').forEach((c,i)=>c.querySelector('button').onclick=()=>{const x=list[i];db.items.find(y=>y.id===x.id)||db.items.unshift(x);save();detail(x)})}catch(e){h.textContent='Anime kataloğuna ulaşılamadı.'}}
+async function archiveSearch(inputId,hostId){const q=document.getElementById(inputId).value.trim();if(!q)return alert('Film adı yaz');const h=document.getElementById(hostId);h.textContent='Açık lisanslı film aranıyor…';try{const p=new URLSearchParams({q:'mediatype:movies AND title:"'+q.replace(/[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ ]/g,' ')+'"',rows:'15',output:'json'});['identifier','title','year'].forEach(x=>p.append('fl[]',x));const r=await fetch('https://archive.org/advancedsearch.php?'+p);const d=await r.json();const docs=d.response?.docs||[];const found=(await Promise.all(docs.slice(0,12).map(async x=>{try{const m=await fetch('https://archive.org/metadata/'+encodeURIComponent(x.identifier)).then(r=>r.json());const lic=m.metadata?.licenseurl||'';if(!/creativecommons\.org\/publicdomain\/(zero|mark)\/1\.0/i.test(lic))return null;const f=(m.files||[]).filter(f=>/\.mp4$/i.test(f.name||'')&&Number(f.size)>1000000).sort((a,b)=>Number(b.size)-Number(a.size))[0];if(!f)return null;return {id:'ar'+x.identifier,title:m.metadata?.title||x.title,kind:'Kamu malı film',year:m.metadata?.year||x.year||'',poster:'https://archive.org/services/img/'+encodeURIComponent(x.identifier),url:'https://archive.org/download/'+encodeURIComponent(x.identifier)+'/'+f.name.split('/').map(encodeURIComponent).join('/'),license:lic,archiveId:x.identifier}}catch(e){return null}}))).filter(Boolean);showCards(hostId,found);const host=document.getElementById(hostId);host.querySelectorAll('.card').forEach((c,i)=>{const x=found[i];const b=c.querySelector('button');b.textContent='▶ Safari’de oynat';b.onclick=()=>{if(!db.items.some(y=>y.id===x.id))db.items.unshift(x);save();playVideo(x.title,x.url,x.id)}})}catch(e){h.textContent='Arşiv bağlantısı başarısız oldu.'}}
+async function addRepo(){const url=document.getElementById('repoUrl').value.trim(),status=document.getElementById('repoStatus');if(!valid(url))return status.textContent='Geçerli https URL gir.';status.textContent='Depo okunuyor…';try{const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);const manifest=await r.json();const lists=manifest.pluginLists||[];let plugins=[];for(const u of lists){try{const pr=await fetch(u);if(pr.ok){const x=await pr.json();if(Array.isArray(x))plugins.push(...x.map(p=>({...p,repo:manifest.name||url})))}}catch(e){}}const repo={url,name:manifest.name||url,description:manifest.description||'',plugins,addedAt:Date.now()};db.repos=db.repos.filter(x=>x.url!==url);db.repos.unshift(repo);save();status.textContent=repo.name+' • '+plugins.length+' eklenti katalogda.';renderRepos()}catch(e){status.textContent='Depo alınamadı. Safari CORS izni vermiyor olabilir; manifest ve pluginLists URL’leri doğrudan erişilebilir olmalı.'}}
+function renderRepos(){const h=document.getElementById('repoList');h.innerHTML='';if(!db.repos.length){h.innerHTML='<p class="muted">Henüz depo eklenmedi.</p>';return}db.repos.forEach(repo=>{const p=document.createElement('div');p.className='panel';const head=document.createElement('div');head.innerHTML='<strong></strong><div class="muted"></div>';head.querySelector('strong').textContent=repo.name;head.querySelector('.muted').textContent=repo.description+' • '+repo.plugins.length+' eklenti';p.append(head);const search=document.createElement('input');search.placeholder='Eklenti ara…';search.style.margin='10px 0';p.append(search);const list=document.createElement('div');p.append(list);function draw(){list.innerHTML='';repo.plugins.filter(x=>((x.name||x.internalName||'')+' '+(x.description||'')).toLocaleLowerCase('tr').includes(search.value.toLocaleLowerCase('tr'))).forEach(x=>{const row=document.createElement('div');row.className='itemrow';const name=document.createElement('div');name.className='grow';name.innerHTML='<strong></strong><div class="muted"></div>';name.querySelector('strong').textContent=x.name||x.internalName||'İsimsiz eklenti';name.querySelector('.muted').textContent=(x.language||'')+' • '+(x.version||'')+' • '+(x.tvTypes||[]).join(', ');const badge=document.createElement('span');badge.className='badge';badge.textContent='Android .cs3';row.append(name,badge);list.append(row)})}search.oninput=draw;draw();const del=document.createElement('button');del.textContent='Depoyu kaldır';del.onclick=()=>{db.repos=db.repos.filter(x=>x.url!==repo.url);save();renderRepos()};p.append(del);h.append(p)})}
+function importM3U(){const text=document.getElementById('m3uText').value.trim();if(!text)return;const lines=text.split(/\r?\n/);let meta='';let count=0;for(const l of lines){if(l.startsWith('#EXTINF'))meta=l.split(',').pop().trim();else if(/^https?:\/\//.test(l)){db.channels.push({name:meta||'Kanal',url:l});meta='';count++}}save();document.getElementById('m3uStatus').textContent=count+' kanal içe aktarıldı. Kitaplığa ayrıca ekleyip yayın adresini oynatabilirsin.'}
+document.getElementById('m3uFile').onchange=async e=>{const f=e.target.files[0];if(f)document.getElementById('m3uText').value=await f.text()};
+function renderLibrary(){const h=document.getElementById('libraryList');h.innerHTML='';let a=db.items;if(libraryMode==='fav')a=a.filter(x=>db.favorites.includes(x.id));if(libraryMode==='history')a=a.filter(x=>db.history.includes(x.id));a.forEach(x=>{const r=document.createElement('div');r.className='itemrow';r.innerHTML='<span class="grow"></span><button>Aç</button>';r.querySelector('span').textContent=x.title;r.querySelector('button').onclick=()=>detail(x);h.append(r)})}
+const oldPlay=playVideo;playVideo=function(title,url,id){if(id){db.history=[id,...db.history.filter(x=>x!==id)].slice(0,80);save();renderRecent()}oldPlay(title,url,id)};
+renderRepos();renderRecent();if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script></body></html>
