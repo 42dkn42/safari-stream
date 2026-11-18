@@ -74,6 +74,7 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
  <button data-filter="fav" onclick="setFilter('fav')">Favoriler</button>
  <button data-filter="history" onclick="setFilter('history')">Geçmiş</button>
  <button data-filter="live" onclick="showLive()">Canlı TV</button>
+ <button data-filter="cloud" onclick="showCloudRepos()">CloudStream Depoları</button>
 </nav>
 
 <main>
@@ -161,6 +162,19 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
   <button class="primary" style="width:100%" onclick="importCatalog()">Kataloğu içe aktar</button>
   <hr>
   <button style="width:100%" onclick="exportCatalog()">Kataloğu dışa aktar</button>
+ </div>
+</div>
+
+
+<div class="modal" id="cloudRepoModal">
+ <div class="sheet">
+  <button class="close" onclick="closeModal('cloudRepoModal')">✕</button>
+  <h2>CloudStream Depoları</h2>
+  <p class="muted">MRC deposundaki eklentiler canlı olarak listelenir. .cs3 dosyaları Android/CloudStream içindir; Safari bunları çalıştıramaz. Bu ekran depo kataloğunu görüntüler, video kaynağı çözümlemez.</p>
+  <input id="repoSearch" class="field" placeholder="Eklenti ara..." oninput="renderCloudRepos()">
+  <div id="repoStatus" class="muted">Depo yükleniyor…</div>
+  <div id="repoList"></div>
+  <div class="notice">Safari’de oynatma için eklentinin kaynak çözümleme mantığının JavaScript’e ayrıca aktarılması gerekir. Her eklenti ayrı ayrı uyarlanmalıdır.</div>
  </div>
 </div>
 
@@ -543,6 +557,47 @@ function renderChannels(){
   const del=document.createElement("button");del.textContent="Sil";del.onclick=()=>{channels=channels.filter(x=>x.id!==ch.id);saveChannels();renderChannels();};
   actions.append(play,del);row.append(name,actions);host.append(row);
  });
+}
+
+
+const CLOUD_REPO_LIST="https://raw.githubusercontent.com/lepotane/MRC-builds/builds/plugins.json";
+let cloudRepos=[];
+let cloudRepoLoaded=false;
+async function showCloudRepos(){
+ document.getElementById("cloudRepoModal").classList.add("show");
+ if(cloudRepoLoaded){renderCloudRepos();return;}
+ const status=document.getElementById("repoStatus");
+ status.textContent="MRC CloudStream deposu okunuyor…";
+ try{
+  const res=await fetch(CLOUD_REPO_LIST,{cache:"no-store"});
+  if(!res.ok)throw Error("HTTP "+res.status);
+  const data=await res.json();
+  if(!Array.isArray(data))throw Error("Depo biçimi beklenmiyor");
+  cloudRepos=data;
+  cloudRepoLoaded=true;
+  renderCloudRepos();
+ }catch(e){
+  status.textContent="Depo listesi alınamadı. Bağlantıyı veya CORS erişimini kontrol et.";
+ }
+}
+function renderCloudRepos(){
+ const q=(document.getElementById("repoSearch").value||"").toLocaleLowerCase("tr");
+ const host=document.getElementById("repoList");host.innerHTML="";
+ const list=cloudRepos.filter(p=>(p.name+" "+(p.description||"")+" "+(p.language||"")+" "+(p.tvTypes||[]).join(" ")).toLocaleLowerCase("tr").includes(q));
+ const active=list.filter(p=>p.status===1);
+ document.getElementById("repoStatus").textContent=cloudRepos.length+" eklenti bulundu • "+cloudRepos.filter(p=>p.status===1).length+" etkin • "+cloudRepos.filter(p=>p.status!==1).length+" pasif";
+ list.forEach(p=>{
+  const card=document.createElement("div");card.className="source";card.style.display="block";
+  const row=document.createElement("div");row.style.display="flex";row.style.justifyContent="space-between";row.style.gap="8px";
+  const title=document.createElement("strong");title.textContent=p.name||p.internalName||"İsimsiz eklenti";
+  const state=document.createElement("span");state.className="muted";state.textContent=p.status===1?"Etkin":"Pasif";
+  row.append(title,state);
+  const desc=document.createElement("p");desc.className="muted";desc.textContent=p.description||"Açıklama yok";
+  const meta=document.createElement("p");meta.className="muted";meta.textContent="Dil: "+(p.language||"—")+" • Tür: "+((p.tvTypes||[]).join(", ")||"—")+" • Sürüm: "+(p.version||"—");
+  const link=document.createElement("a");link.href=p.url||"https://github.com/lepotane/MRC-builds";link.target="_blank";link.rel="noopener";link.textContent="Eklenti dosyasını görüntüle";link.style.color="#ff9aaa";link.style.fontSize="12px";
+  card.append(row,desc,meta,link);host.append(card);
+ });
+ if(!list.length)host.innerHTML='<div class="empty">Eşleşen eklenti bulunamadı.</div>';
 }
 
 render();
