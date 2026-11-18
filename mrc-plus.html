@@ -365,6 +365,7 @@ function exportCatalog(){
    const data=await response.json();
    showResults(data.map(a=>({
     title:a.show.name,
+    tvmazeId:a.show.id,
     type:"series",
     year:a.show.premiered?a.show.premiered.slice(0,4):"",
     genre:(a.show.genres||[]).join(", "),
