@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d18">
+<title>Safari Stream</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090d18;color:#f4f6ff;font-family:Arial,sans-serif}
+header{padding:24px 18px;background:linear-gradient(130deg,#172c52,#101729)}
+.logo{font-size:27px;font-weight:900;color:#69b8ff}
+header p{color:#b6c5dd;font-size:13px}
+main{padding:16px;max-width:850px;margin:auto}
+h2{font-size:17px}
+.search,input{width:100%;padding:14px;border-radius:12px;border:1px solid #293752;background:#121c2e;color:white;margin:8px 0}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+button{border:0;padding:12px;border-radius:10px;background:#1b2b45;color:white;font-weight:bold}
+button:active{opacity:.7}
+.category{padding:18px 10px;text-align:center;background:#142039;border:1px solid #263b5e}
+.card{background:#121c2e;padding:16px;border-radius:14px;margin:12px 0}
+.small{font-size:12px;color:#9eacc2}
+.primary{background:#1879e8;width:100%;margin-top:8px}
+.danger{background:#642d38}
+a{color:#80bdff}
+video{width:100%;border-radius:12px;background:#000;margin-top:10px}
+footer{text-align:center;color:#78869d;padding:30px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">▶ SAFARI STREAM</div>
+<p>Film • Dizi • Anime • Belgesel • Canlı yayın</p>
+</header>
+<main>
+<input id="search" class="search" placeholder="Film, dizi veya kaynak ara...">
+<h2>Kategoriler</h2>
+<div class="categories">
+<button class="category" onclick="filter('Film')">🎬 Film</button>
+<button class="category" onclick="filter('Dizi')">📺 Dizi</button>
+<button class="category" onclick="filter('Anime')">🎌 Anime</button>
+<button class="category" onclick="filter('Belgesel')">🌍 Belgesel</button>
+<button class="category" onclick="filter('Canlı yayın')">📡 Canlı yayın</button>
+<button class="category" onclick="filter('Hepsi')">✨ Hepsi</button>
+</div>
+<h2>Yayın kaynakları</h2>
+<div id="catalog" class="card">
+<p class="small">Henüz yayın kaynağı eklenmedi.</p>
+<p>Buraya eklediğin yasal ve Safari uyumlu yayın kaynakları gelecek.</p>
+</div>
+<h2>CloudStream Depo Yöneticisi</h2>
+<div class="card">
+<p class="small">Depo adreslerini kaydet ve yönet. Android eklentileri Safari'de doğrudan çalışmaz.</p>
+<input id="repoName" placeholder="Depo adı">
+<input id="repoUrl" placeholder="Depo URL adresi">
+<button class="primary" onclick="addRepo()">+ Depo ekle</button>
+<div id="repos"></div>
+</div>
+<h2>Safari Video Oynatıcı</h2>
+<div class="card">
+<input id="videoUrl" placeholder="İzinli video bağlantısını yapıştır">
+<button class="primary" onclick="playVideo()">Videoyu oynat</button>
+<video id="player" controls playsinline></video>
+<p class="small">Safari'nin desteklediği MP4 ve HLS (.m3u8) yayınları için.</p>
+</div>
+</main>
+<footer>SAFARI STREAM • İlk sürüm</footer>
+<script>
+let repos=JSON.parse(localStorage.getItem("ss_repos")||"[]");
+function render(){
+document.getElementById("repos").innerHTML="";
+repos.forEach((r,i)=>{
+let d=document.createElement("div");
+d.className="card";
+let n=document.createElement("b");n.textContent=r.name;
+let u=document.createElement("p");u.className="small";u.textContent=r.url;
+let b=document.createElement("button");b.className="danger";b.textContent="Sil";
+b.onclick=()=>{repos.splice(i,1);save()};
+d.append(n,u,b);document.getElementById("repos").append(d);
+});
+}
+function save(){localStorage.setItem("ss_repos",JSON.stringify(repos));render()}
+function addRepo(){
+let name=document.getElementById("repoName").value.trim();
+let url=document.getElementById("repoUrl").value.trim();
+if(!name||!/^https?:\/\//i.test(url)){alert("Depo adı ve geçerli URL gir.");return}
+repos.push({name,url});save();
+document.getElementById("repoName").value="";
+document.getElementById("repoUrl").value="";
+}
+function playVideo(){
+let url=document.getElementById("videoUrl").value.trim();
+if(!/^https:\/\//i.test(url)){alert("HTTPS video adresi gir.");return}
+let p=document.getElementById("player");p.src=url;p.load();p.play().catch(()=>alert("Bu yayın biçimi veya kaynak Safari tarafından desteklenmiyor olabilir."));
+}
+function filter(category){
+document.getElementById("search").value=category==="Hepsi"?"":category;
+}
+document.getElementById("search").addEventListener("input",e=>{
+document.getElementById("catalog").textContent="Arama: "+e.target.value+" — Henüz katalog kaynakları bağlanmadı.";
+});
+render();
+</script>
+</body>
+</html>
