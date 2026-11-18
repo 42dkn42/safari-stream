@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-11-18",
+  "project": "MRC Stream Safari conversion research",
+  "conclusion": "No MRC-builds .cs3 artifact has yet been proven to have a matching, licensed source implementation that can be safely ported as a browser adapter.",
+  "verifiedFindings": [
+    {
+      "plugin": "AnimeciX",
+      "candidateSource": "https://github.com/Emre-Kahveci/CloudStreamHub",
+      "sourcePath": "AnimeciX/src/main/kotlin/com/cloudstream/tr/animecix/AnimeciX.kt",
+      "license": "GPL-3.0",
+      "status": "not-converted",
+      "reason": "This is a separate provider implementation, not verified as the source corresponding to the MRC-builds binary. The provider is an anime streaming scraper; no authorization to republish or stream its indexed media was established."
+    },
+    {
+      "plugin": "StarTV",
+      "candidateSource": "https://github.com/Emre-Kahveci/CloudStreamHub",
+      "sourcePath": "StarTV/src/main/kotlin/com/cloudstream/tr/startv/StarTV.kt",
+      "license": "GPL-3.0",
+      "status": "not-converted",
+      "reason": "Separate provider source found, but not verified as the source corresponding to the MRC-builds binary. No adapter built until official rights and a browser-compatible authorized playback path are established."
+    },
+    {
+      "plugin": "BelgeselX",
+      "candidateSource": "https://github.com/Emre-Kahveci/CloudStreamHub",
+      "sourcePath": "BelgeselX/src/main/kotlin/com/cloudstream/tr/belgeselx/BelgeselX.kt",
+      "license": "GPL-3.0",
+      "status": "not-converted",
+      "reason": "Separate provider source found; not verified as the source corresponding to the MRC-builds binary and no media rights review completed."
+    },
+    {
+      "plugin": "YesilCamTv",
+      "candidateSource": "https://github.com/Emre-Kahveci/CloudStreamHub",
+      "sourcePath": "YesilCamTv/src/main/kotlin/com/cloudstream/tr/yesilcamtv/YesilCamTv.kt",
+      "license": "GPL-3.0",
+      "status": "not-converted",
+      "reason": "Separate provider source found; not verified as the source corresponding to the MRC-builds binary and no media rights review completed."
+    },
+    {
+      "plugin": "RareFilmm",
+      "candidateSource": "https://github.com/Emre-Kahveci/CloudStreamHub",
+      "sourcePath": "RareFilmm/src/main/kotlin/com/cloudstream/tr/rarefilmm/RareFilmm.kt",
+      "license": "GPL-3.0",
+      "status": "not-converted",
+      "reason": "Separate provider source found; not verified as the source corresponding to the MRC-builds binary and no media rights review completed."
+    },
+    {
+      "plugin": "AnimeAV",
+      "candidateSource": "https://github.com/Kraptor123/Cs-Karma",
+      "sourcePath": "AnimeAV/src/main/kotlin/com/kraptor/AnimeAV.kt",
+      "license": "NOASSERTION",
+      "status": "excluded",
+      "reason": "No repository license file was found; no permission to port or redistribute was established."
+    }
+  ],
+  "constraints": [
+    "CloudStream .cs3 is an Android/Kotlin plugin artifact, not executable JavaScript.",
+    "A similarly named provider in another repository does not prove it is the source of the MRC binary.",
+    "A browser adapter requires a reviewed implementation, permission/license compliance, lawful media rights, CORS-compatible requests, and direct Safari-compatible MP4/HLS playback.",
+    "No DRM, authentication, anti-bot, paywall, or access-control circumvention is implemented."
+  ],
+  "nextSafePath": "Build adapters only for official broadcaster/public-domain/explicitly licensed sources, using their documented public APIs or direct authorized media URLs."
+}
