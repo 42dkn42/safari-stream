@@ -276,6 +276,148 @@ function exportCatalog(){
  const blob=new Blob([JSON.stringify(items,null,2)],{type:"application/json"});
  const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="mrc-plus-katalog.json";a.click();URL.revokeObjectURL(url);
 }
+
+// MRC PLUS - Otomatik katalog arama
+(function(){
+ const main=document.querySelector("main");
+ const section=document.createElement("section");
+ section.innerHTML=`
+ <div class="heading"><h2>İnternetten katalog ara</h2></div>
+ <input id="onlineSearch" class="search" placeholder="Film, dizi veya anime adı...">
+ <div class="actions">
+  <button class="primary" id="searchShows">Dizi ara</button>
+  <button class="primary" id="searchAnime">Anime ara</button>
+ </div>
+ <div id="onlineResults" class="grid"></div>
+ <p class="muted">Sonuçlar katalog bilgisi ve afiş sağlar. Video yayını sağlamaz.</p>`;
+ main.insertBefore(section,main.querySelector(".notice"));
+
+ const input=section.querySelector("#onlineSearch");
+ const results=section.querySelector("#onlineResults");
+
+ function showResults(data){
+  results.innerHTML="";
+  if(!data.length){
+   results.innerHTML='<div class="empty">Sonuç bulunamadı.</div>';
+   return;
+  }
+  data.forEach(x=>{
+   const card=document.createElement("div");
+   card.className="item";
+   const poster=document.createElement("div");
+   poster.className="poster";
+   if(x.poster){
+    const img=document.createElement("img");
+    img.src=x.poster;
+    img.onerror=()=>img.remove();
+    poster.appendChild(img);
+   }
+   const ph=document.createElement("div");
+   ph.className="placeholder";
+   ph.textContent=x.title;
+   poster.appendChild(ph);
+   const title=document.createElement("h3");
+   title.textContent=x.title;
+   const year=document.createElement("small");
+   year.textContent=x.year||"";
+   const add=document.createElement("button");
+   add.className="primary";
+   add.style.width="100%";
+   add.style.marginTop="8px";
+   add.textContent="＋ Kataloğa ekle";
+   add.onclick=()=>{
+    if(items.some(a=>a.title.toLowerCase()===x.title.toLowerCase())){
+     alert("Bu içerik zaten kataloğunda var.");
+     return;
+    }
+    items.unshift({
+     id:Date.now()+Math.random(),
+     title:x.title,
+     type:x.type,
+     year:x.year,
+     genre:x.genre||"",
+     poster:x.poster||"",
+     description:x.description||"",
+     video:"",
+     sources:[],
+     episodes:[]
+    });
+    save();
+    render();
+    add.textContent="Eklendi ✓";
+    add.disabled=true;
+   };
+   card.append(poster,title,year,add);
+   results.appendChild(card);
+  });
+ }
+
+ async function searchShows(){
+  const q=input.value.trim();
+  if(!q){alert("Aramak istediğin adı yaz.");return;}
+  results.textContent="Diziler aranıyor...";
+  try{
+   const response=await fetch(
+    "https://api.tvmaze.com/search/shows?q="+encodeURIComponent(q)
+   );
+   if(!response.ok)throw Error();
+   const data=await response.json();
+   showResults(data.map(a=>({
+    title:a.show.name,
+    type:"series",
+    year:a.show.premiered?a.show.premiered.slice(0,4):"",
+    genre:(a.show.genres||[]).join(", "),
+    poster:a.show.image?a.show.image.original:"",
+    description:(a.show.summary||"").replace(/<[^>]*>/g," ")
+   })));
+  }catch(e){
+   results.textContent="Dizi kataloğuna şu anda ulaşılamadı. Daha sonra tekrar dene.";
+  }
+ }
+
+ async function searchAnime(){
+  const q=input.value.trim();
+  if(!q){alert("Aramak istediğin anime adını yaz.");return;}
+  results.textContent="Animeler aranıyor...";
+  try{
+   const response=await fetch("https://graphql.anilist.co",{
+    method:"POST",
+    headers:{"Content-Type":"application/json","Accept":"application/json"},
+    body:JSON.stringify({
+     query:`query ($search:String) {
+      Page(perPage:20) {
+       media(search:$search,type:ANIME) {
+        title { romaji english native }
+        startDate { year }
+        coverImage { extraLarge large }
+        description(asHtml:false)
+        genres
+       }
+      }
+     }`,
+     variables:{search:q}
+    })
+   });
+   if(!response.ok)throw Error();
+   const data=await response.json();
+   const list=data.data.Page.media.map(a=>({
+    title:a.title.english||a.title.romaji||a.title.native,
+    type:"series",
+    year:a.startDate.year||"",
+    genre:(a.genres||[]).join(", "),
+    poster:a.coverImage.extraLarge||a.coverImage.large||"",
+    description:a.description||""
+   }));
+   showResults(list);
+  }catch(e){
+   results.textContent="Anime kataloğuna şu anda ulaşılamadı. Daha sonra tekrar dene.";
+  }
+ }
+
+ section.querySelector("#searchShows").onclick=searchShows;
+ section.querySelector("#searchAnime").onclick=searchAnime;
+})();
+
 render();
 </script>
 </body>
