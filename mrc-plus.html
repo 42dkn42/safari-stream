@@ -319,7 +319,7 @@ function playVideo(title,url,id){
  if(id){history=[id,...history.filter(a=>a!==id)].slice(0,50);save();render();}
  const p=document.getElementById("player");document.getElementById("playerTitle").textContent=title;
  const status=document.getElementById("playerStatus");
- if(status)status.textContent=/\\.m3u8(?:$|[?#])/i.test(url)?"HLS yayını Safari'de açılıyor…":"Video yükleniyor…";
+ if(status)status.textContent=/\.m3u8(?:$|[?#])/i.test(url)?"HLS yayını Safari'de açılıyor…":"Video yükleniyor…";
  p.onerror=()=>{if(status)status.textContent="Safari bu yayını oynatamadı. Adresin doğrudan MP4/HLS olması, erişilebilir olması ve yayın sunucusunun gerekli izinleri vermesi gerekir.";};
  p.onloadedmetadata=()=>{if(status)status.textContent="Yayın yüklendi. İyi seyirler.";};
  p.src=url;p.load();closeModal("detailModal");document.getElementById("playerModal").classList.add("show");
