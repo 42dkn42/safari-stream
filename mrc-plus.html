@@ -512,7 +512,7 @@ async function searchMovies(){
   results.textContent="Kamu malı film arşivi aranıyor…";
   const allowedLicense=u=>typeof u==="string"&&(/creativecommons\.org\/publicdomain\/(zero|mark)\/1\.0/i.test(u));
   try{
-   const params=new URLSearchParams({q:'mediatype:movies AND title:"'+q.replace(/[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ\\s]/g," ").replace(/\\s+/g," ")+'"',rows:"18",page:"1",output:"json"});
+   const params=new URLSearchParams({q:'mediatype:movies AND title:"'+q.replace(/[^a-zA-Z0-9ğüşöçıİĞÜŞÖÇ ]/g," ")+'"' ,rows:"18",page:"1",output:"json"});
    ["identifier","title","year","description"].forEach(f=>params.append("fl[]",f));
    params.append("sort[]","downloads desc");
    const sr=await fetch("https://archive.org/advancedsearch.php?"+params.toString(),{credentials:"omit"});
