@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-18",
+  "sourceRepository": "https://github.com/lepotane/MRC-builds/tree/builds",
+  "sourceTreeHasKotlinOrJavaOrJavaScript": false,
+  "sourceFiles": [],
+  "summary": {
+    "total": 73,
+    "cs3": 73,
+    "webAdaptersReady": 0,
+    "blocked": 73
+  },
+  "policy": "No .cs3 binary is executed in Safari. A web adapter requires source code or explicit permission and a separately implemented, reviewed browser-compatible integration. Only authorized content and direct Safari-compatible media URLs may be supported.",
+  "plugins": [
+    {
+      "id": "animeav",
+      "name": "AnimeAV",
+      "language": "mx",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/AnimeAV.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "animecix",
+      "name": "AnimeciX",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/AnimeciX.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "animeworld",
+      "name": "AnimeWorld",
+      "language": "it",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/AnimeWorld.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "animeytx",
+      "name": "AnimeYTX",
+      "language": "mx",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/AnimeYTX.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "anizium",
+      "name": "Anizium",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Anizium.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "anizm",
+      "name": "Anizm",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Anizm.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "asyaanimeleri",
+      "name": "AsyaAnimeleri",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/AsyaAnimeleri.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "asyawatch",
+      "name": "AsyaWatch",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/AsyaWatch.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "atv",
+      "name": "Atv",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Atv.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "belgeselx",
+      "name": "BelgeselX",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/BelgeselX.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "birasyadizi",
+      "name": "BirAsyaDizi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/BirAsyaDizi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "cizgidizi",
+      "name": "CizgiDizi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/CizgiDizi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "cizgimax",
+      "name": "CizgiMax",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/CizgiMax.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "cizgivedizi",
+      "name": "CizgiVeDizi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/CizgiVeDizi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "ddizi",
+      "name": "DDizi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DDizi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizibal",
+      "name": "DiziBal",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziBal.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizibol",
+      "name": "DiziBol",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziBol.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizibox",
+      "name": "DiziBox",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziBox.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizigom",
+      "name": "DiziGom",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziGom.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizikorea",
+      "name": "DiziKorea",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziKorea.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizilife",
+      "name": "DiziLife",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziLife.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizilla",
+      "name": "Dizilla",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Dizilla.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizimag",
+      "name": "DiziMag",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziMag.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizimom",
+      "name": "DiziMom",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziMom.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizipal",
+      "name": "DiziPal",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziPal.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizipal2",
+      "name": "DiziPal2",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziPal2.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizipalorijinal",
+      "name": "DiziPalOrijinal",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziPalOrijinal.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dizipod",
+      "name": "DiziPod",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziPod.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "diziyou",
+      "name": "DiziYou",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DiziYou.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dmax",
+      "name": "DMax",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DMax.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "documentaryarea",
+      "name": "DocumentaryArea",
+      "language": "en",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DocumentaryArea.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "dramadizilerim",
+      "name": "DramaDizilerim",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/DramaDizilerim.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "filmekseni",
+      "name": "FilmEkseni",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/FilmEkseni.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "filmizyon",
+      "name": "FilmIzyon",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/FilmIzyon.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "filmmakinesi",
+      "name": "FilmMakinesi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/FilmMakinesi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "filmmodu",
+      "name": "FilmModu",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/FilmModu.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "fullhdfilmizlesene",
+      "name": "FullHDFilmizlesene",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/FullHDFilmizlesene.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "hdfilmcehennemi",
+      "name": "HDFilmCehennemi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/HDFilmCehennemi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "hdfilmcehennemi2",
+      "name": "HdFilmCehennemi2",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/HdFilmCehennemi2.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "hdfilmdelisi",
+      "name": "HDFilmDelisi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/HDFilmDelisi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "inatboxbc",
+      "name": "InatBoxBC",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/InatBoxBC.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "jetfilmizle",
+      "name": "JetFilmizle",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/JetFilmizle.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "kanald",
+      "name": "KanalD",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/KanalD.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "kultfilmler",
+      "name": "KultFilmler",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/KultFilmler.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "lovefilm",
+      "name": "LoveFilm",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/LoveFilm.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "mrc-live",
+      "name": "MRC-Live",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/MRC-Live.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "mrc-naughty",
+      "name": "MRC-Naughty",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/MRC-Naughty.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "mrc-plus",
+      "name": "MRC-Plus",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/MRC-Plus.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "openanime",
+      "name": "OpenAnime",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/OpenAnime.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "rarefilmm",
+      "name": "RareFilmm",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/RareFilmm.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "rectvbc",
+      "name": "RecTVBC",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/RecTVBC.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "selcukflix",
+      "name": "SelcukFlix",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/SelcukFlix.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "setfilmizle",
+      "name": "SetFilmIzle",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/SetFilmIzle.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "sezonlukdizi",
+      "name": "SezonlukDizi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/SezonlukDizi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "showtv",
+      "name": "Showtv",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Showtv.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "sinefy",
+      "name": "Sinefy",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Sinefy.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "sinemacx",
+      "name": "SinemaCX",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/SinemaCX.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "sinewix",
+      "name": "SineWix",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/SineWix.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "sinezy",
+      "name": "Sinezy",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Sinezy.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "startv",
+      "name": "Startv",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Startv.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "streamed",
+      "name": "Streamed",
+      "language": "en",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Streamed.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "supercartoons",
+      "name": "Supercartoons",
+      "language": "en",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Supercartoons.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "taraftarium24",
+      "name": "Taraftarium24",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Taraftarium24.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "tlc",
+      "name": "TLC",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/TLC.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "trasyalog",
+      "name": "TRasyalog",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/TRasyalog.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "tv8",
+      "name": "Tv8",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Tv8.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "tvdiziler",
+      "name": "TvDiziler",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/TvDiziler.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "ultrafilmizle",
+      "name": "UltraFilmizle",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/UltraFilmizle.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "watch2movies",
+      "name": "Watch2Movies",
+      "language": "en",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/Watch2Movies.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "webdramaturkey2",
+      "name": "WebdramaTurkey2",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/WebdramaTurkey2.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "yabancidizi",
+      "name": "YabanciDizi",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/YabanciDizi.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "yesilcamtv",
+      "name": "YesilCamTv",
+      "language": "tr",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/YesilCamTv.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    },
+    {
+      "id": "yoturkish",
+      "name": "YoTurkish",
+      "language": "en",
+      "url": "https://raw.githubusercontent.com/lepotane/MRC-builds/builds/YoTurkish.cs3",
+      "artifact": "Android CloudStream .cs3",
+      "status": "source-required",
+      "reason": "Published repository tree contains the compiled .cs3 artifact but no corresponding Kotlin/Java/JavaScript source file; Safari adapter not implemented."
+    }
+  ]
+}
