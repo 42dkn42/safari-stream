@@ -3,102 +3,219 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#090d18">
 <title>Safari Stream</title>
 <style>
+:root{--bg:#090d18;--panel:#131b2c;--panel2:#1a2539;--text:#f4f6fb;--muted:#9aa8bd;--accent:#7c5cff;--line:#26334a}
 *{box-sizing:border-box}
-body{margin:0;background:#090d18;color:#f4f6ff;font-family:Arial,sans-serif}
-header{padding:24px 18px;background:linear-gradient(130deg,#172c52,#101729)}
-.logo{font-size:27px;font-weight:900;color:#69b8ff}
-header p{color:#b6c5dd;font-size:13px}
-main{padding:16px;max-width:850px;margin:auto}
-h2{font-size:17px}
-.search,input{width:100%;padding:14px;border-radius:12px;border:1px solid #293752;background:#121c2e;color:white;margin:8px 0}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-button{border:0;padding:12px;border-radius:10px;background:#1b2b45;color:white;font-weight:bold}
-button:active{opacity:.7}
-.category{padding:18px 10px;text-align:center;background:#142039;border:1px solid #263b5e}
-.card{background:#121c2e;padding:16px;border-radius:14px;margin:12px 0}
-.small{font-size:12px;color:#9eacc2}
-.primary{background:#1879e8;width:100%;margin-top:8px}
-.danger{background:#642d38}
-a{color:#80bdff}
-video{width:100%;border-radius:12px;background:#000;margin-top:10px}
-footer{text-align:center;color:#78869d;padding:30px;font-size:12px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:35px}
+header{padding:25px 18px 18px;background:linear-gradient(135deg,#21184b,#101a32 70%,#0b1424)}
+.brand{font-size:25px;font-weight:850;letter-spacing:-1px}
+.brand span{color:#a994ff}
+.sub{color:#b8bfd2;font-size:12px;margin-top:5px}
+.wrap{max-width:850px;margin:auto;padding:16px}
+h2{font-size:17px;margin:22px 0 12px}
+.search{width:100%;padding:14px 15px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:white;font-size:15px;outline:none}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:14px 0;scrollbar-width:none}
+.tabs button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:#c5cce0;padding:10px 14px;border-radius:30px}
+.tabs button.active{background:var(--accent);color:white;border-color:var(--accent)}
+.panel{background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:16px;margin:12px 0}
+button,.btn{cursor:pointer;font:inherit}
+.primary{background:var(--accent);border:0;color:white;padding:12px 15px;border-radius:11px;font-weight:700}
+.secondary{background:var(--panel2);border:1px solid var(--line);color:white;padding:10px 13px;border-radius:10px}
+.danger{background:#542536;color:#ffdce5;border:0;padding:9px 12px;border-radius:9px}
+input,select{font:inherit}
+.field{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0c1423;color:white;margin:7px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1}
+.small{font-size:12px;color:var(--muted);line-height:1.5}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px;min-width:0}
+.item h3{font-size:14px;margin:5px 0 7px;overflow-wrap:anywhere}
+.item p{font-size:12px;color:var(--muted);line-height:1.45}
+.tag{font-size:10px;color:#c9baff;background:#30265a;padding:5px 8px;border-radius:20px;display:inline-block}
+.item button{margin:4px 3px 0 0}
+.empty{padding:28px 12px;text-align:center;color:var(--muted);font-size:13px}
+video{width:100%;background:#000;border-radius:12px;margin-top:10px}
+footer{text-align:center;color:#718099;font-size:11px;padding:25px}
+.hidden{display:none!important}
+a{color:#b8a7ff}
+@media(min-width:650px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">▶ SAFARI STREAM</div>
-<p>Film • Dizi • Anime • Belgesel • Canlı yayın</p>
+ <div class="brand">SAFARI <span>STREAM</span></div>
+ <div class="sub">Kişisel yayın ve içerik kütüphanen</div>
 </header>
-<main>
-<input id="search" class="search" placeholder="Film, dizi veya kaynak ara...">
-<h2>Kategoriler</h2>
-<div class="categories">
-<button class="category" onclick="filter('Film')">🎬 Film</button>
-<button class="category" onclick="filter('Dizi')">📺 Dizi</button>
-<button class="category" onclick="filter('Anime')">🎌 Anime</button>
-<button class="category" onclick="filter('Belgesel')">🌍 Belgesel</button>
-<button class="category" onclick="filter('Canlı yayın')">📡 Canlı yayın</button>
-<button class="category" onclick="filter('Hepsi')">✨ Hepsi</button>
-</div>
-<h2>Yayın kaynakları</h2>
-<div id="catalog" class="card">
-<p class="small">Henüz yayın kaynağı eklenmedi.</p>
-<p>Buraya eklediğin yasal ve Safari uyumlu yayın kaynakları gelecek.</p>
-</div>
-<h2>CloudStream Depo Yöneticisi</h2>
-<div class="card">
-<p class="small">Depo adreslerini kaydet ve yönet. Android eklentileri Safari'de doğrudan çalışmaz.</p>
-<input id="repoName" placeholder="Depo adı">
-<input id="repoUrl" placeholder="Depo URL adresi">
-<button class="primary" onclick="addRepo()">+ Depo ekle</button>
-<div id="repos"></div>
-</div>
-<h2>Safari Video Oynatıcı</h2>
-<div class="card">
-<input id="videoUrl" placeholder="İzinli video bağlantısını yapıştır">
-<button class="primary" onclick="playVideo()">Videoyu oynat</button>
-<video id="player" controls playsinline></video>
-<p class="small">Safari'nin desteklediği MP4 ve HLS (.m3u8) yayınları için.</p>
-</div>
+<main class="wrap">
+ <input id="search" class="search" placeholder="Film, dizi veya içerik ara..." autocomplete="off">
+ <div class="tabs" id="tabs">
+  <button class="active" data-cat="all">Tümü</button>
+  <button data-cat="film">Filmler</button>
+  <button data-cat="series">Diziler</button>
+  <button data-cat="anime">Anime</button>
+  <button data-cat="documentary">Belgesel</button>
+  <button data-cat="live">Canlı</button>
+  <button data-cat="favorite">Favorilerim</button>
+ </div>
+
+ <section>
+  <h2>İçerik kütüphanesi</h2>
+  <div id="items" class="cards"></div>
+ </section>
+
+ <section class="panel">
+  <h2>▶ Video oynatıcı</h2>
+  <div id="nowPlaying" class="small">Henüz içerik seçilmedi.</div>
+  <video id="player" controls playsinline webkit-playsinline preload="metadata"></video>
+  <p class="small">MP4 ve Safari'nin desteklediği HLS bağlantıları kullanılabilir. Bazı yayınlar tarayıcı, erişim izni veya CORS kısıtlamaları nedeniyle açılmayabilir.</p>
+ </section>
+
+ <section class="panel">
+  <h2>＋ Depo / katalog ekle</h2>
+  <p class="small">HTTPS adresini ekleyebilirsin. Bu alan depo adreslerini saklar; Android CloudStream eklentilerini çalıştırmaz.</p>
+  <input id="repoName" class="field" placeholder="Depo adı">
+  <input id="repoUrl" class="field" type="url" placeholder="https://ornek.com/katalog.json">
+  <button class="primary" id="addRepo">Depoyu kaydet</button>
+  <div id="repos"></div>
+ </section>
+
+ <section class="panel">
+  <h2>⇧ JSON katalog içe aktar</h2>
+  <p class="small">Uyumlu JSON dosyası seç. Dosyadaki içerikler kütüphanene eklenir. Kod veya eklenti çalıştırılmaz.</p>
+  <input id="jsonFile" class="field" type="file" accept=".json,application/json">
+  <button class="secondary" id="importJson">Kataloğu içe aktar</button>
+  <p class="small">Örnek biçim: [{"title":"Örnek içerik","category":"film","url":"https://site.com/video.mp4","description":"Açıklama"}]</p>
+  <button class="secondary" id="exportRepos">Depoları dışa aktar</button>
+ </section>
+
+ <section class="panel">
+  <h2>◷ Son izlenenler</h2>
+  <div id="history" class="small">Henüz izleme geçmişi yok.</div>
+ </section>
+
+ <section class="panel">
+  <h2>Bilgi ve uyumluluk</h2>
+  <p class="small">Safari Stream bir web uygulamasıdır. CloudStream'in Android için yazılmış eklentileri Safari'de çalışmaz. Yalnızca Safari ile uyumlu web katalogları ve izleme yetkin bulunan yayın bağlantıları kullanılmalıdır. İçerik kaynaklarının kullanım koşullarına uy.</p>
+  <button class="danger" id="clearData">Yerel uygulama verilerini sil</button>
+ </section>
 </main>
-<footer>SAFARI STREAM • İlk sürüm</footer>
+<footer>SAFARI STREAM • 2.0</footer>
 <script>
-let repos=JSON.parse(localStorage.getItem("ss_repos")||"[]");
+const $=id=>document.getElementById(id);
+const read=(key,def)=>{try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}};
+const save=(key,val)=>localStorage.setItem(key,JSON.stringify(val));
+let items=read("ss_items",[]);
+let repos=read("ss_repos",[]);
+let favorites=read("ss_favorites",[]);
+let history=read("ss_history",[]);
+let category="all";
+
+function safeUrl(value){
+ try{
+  const u=new URL(value);
+  return u.protocol==="https:"?u.href:null;
+ }catch{return null}
+}
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 function render(){
-document.getElementById("repos").innerHTML="";
-repos.forEach((r,i)=>{
-let d=document.createElement("div");
-d.className="card";
-let n=document.createElement("b");n.textContent=r.name;
-let u=document.createElement("p");u.className="small";u.textContent=r.url;
-let b=document.createElement("button");b.className="danger";b.textContent="Sil";
-b.onclick=()=>{repos.splice(i,1);save()};
-d.append(n,u,b);document.getElementById("repos").append(d);
-});
+ const q=$("search").value.trim().toLocaleLowerCase("tr");
+ const filtered=items.filter(x=>{
+  const cat=String(x.category||"film").toLowerCase();
+  const matchCat=category==="all"||(category==="favorite"?favorites.includes(x.id):cat===category);
+  const matchText=(String(x.title||"")+" "+String(x.description||"")).toLocaleLowerCase("tr").includes(q);
+  return matchCat&&matchText;
+ });
+ $("items").innerHTML=filtered.length?filtered.map(x=>`
+  <article class="item">
+   <span class="tag">${esc(x.category||"film")}</span>
+   <h3>${esc(x.title)}</h3>
+   <p>${esc(x.description||"Açıklama bulunmuyor.")}</p>
+   <button class="primary" onclick="playItem('${esc(x.id)}')">▶ İzle</button>
+   <button class="secondary" onclick="toggleFav('${esc(x.id)}')">${favorites.includes(x.id)?"★":"☆"}</button>
+  </article>`).join(""):'<div class="empty">Bu kategoride içerik yok. JSON katalog içe aktarabilirsin.</div>';
+ renderRepos();renderHistory();
 }
-function save(){localStorage.setItem("ss_repos",JSON.stringify(repos));render()}
+function playItem(id){
+ const x=items.find(a=>a.id===id);if(!x)return;
+ const url=safeUrl(x.url);if(!url){alert("Geçerli HTTPS video bağlantısı bulunamadı.");return}
+ $("nowPlaying").textContent=x.title;
+ const p=$("player");p.src=url;p.load();
+ p.play().catch(()=>{});
+ history=[{title:x.title,url:x.url,id:x.id},...history.filter(a=>a.id!==id)].slice(0,10);
+ save("ss_history",history);renderHistory();
+}
+function toggleFav(id){
+ favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+ save("ss_favorites",favorites);render();
+}
+function renderRepos(){
+ $("repos").innerHTML=repos.length?repos.map((r,i)=>`
+ <div class="panel">
+ <b>${esc(r.name)}</b><p class="small">${esc(r.url)}</p>
+ <div class="row">
+ <button class="secondary" onclick="openRepo(${i})">Adresi aç</button>
+ <button class="danger" onclick="deleteRepo(${i})">Sil</button>
+ </div></div>`).join(""):'<p class="small">Henüz depo eklenmedi.</p>';
+}
 function addRepo(){
-let name=document.getElementById("repoName").value.trim();
-let url=document.getElementById("repoUrl").value.trim();
-if(!name||!/^https?:\/\//i.test(url)){alert("Depo adı ve geçerli URL gir.");return}
-repos.push({name,url});save();
-document.getElementById("repoName").value="";
-document.getElementById("repoUrl").value="";
+ const name=$("repoName").value.trim(),url=safeUrl($("repoUrl").value.trim());
+ if(!name||!url){alert("Depo adı ve geçerli HTTPS adresi gir.");return}
+ if(repos.some(r=>r.url===url)){alert("Bu adres zaten kayıtlı.");return}
+ repos.push({name,url});save("ss_repos",repos);
+ $("repoName").value="";$("repoUrl").value="";render();
 }
-function playVideo(){
-let url=document.getElementById("videoUrl").value.trim();
-if(!/^https:\/\//i.test(url)){alert("HTTPS video adresi gir.");return}
-let p=document.getElementById("player");p.src=url;p.load();p.play().catch(()=>alert("Bu yayın biçimi veya kaynak Safari tarafından desteklenmiyor olabilir."));
+function openRepo(i){window.open(repos[i].url,"_blank","noopener")}
+function deleteRepo(i){if(confirm("Bu depoyu silmek istiyor musun?")){repos.splice(i,1);save("ss_repos",repos);render()}}
+function renderHistory(){
+ $("history").innerHTML=history.length?history.map(x=>`<div style="padding:7px 0">${esc(x.title)}</div>`).join(""):"Henüz izleme geçmişi yok.";
 }
-function filter(category){
-document.getElementById("search").value=category==="Hepsi"?"":category;
+function importCatalog(data){
+ if(!Array.isArray(data))throw Error("JSON dosyası bir içerik dizisi olmalı.");
+ let count=0;
+ for(const x of data){
+  if(!x||typeof x!=="object")continue;
+  const title=String(x.title||x.name||"").trim();
+  const url=safeUrl(x.url||x.link||"");
+  if(!title||!url)continue;
+  const cat=String(x.category||"film").toLowerCase();
+  const allowed=["film","series","anime","documentary","live"];
+  items.push({
+   id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),
+   title,url,category:allowed.includes(cat)?cat:"film",
+   description:String(x.description||"").slice(0,500)
+  });count++;
+ }
+ save("ss_items",items);render();return count;
 }
-document.getElementById("search").addEventListener("input",e=>{
-document.getElementById("catalog").textContent="Arama: "+e.target.value+" — Henüz katalog kaynakları bağlanmadı.";
+$("addRepo").addEventListener("click",addRepo);
+$("search").addEventListener("input",render);
+$("tabs").addEventListener("click",e=>{
+ const b=e.target.closest("button[data-cat]");if(!b)return;
+ category=b.dataset.cat;
+ document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("active",x===b));
+ render();
+});
+$("importJson").addEventListener("click",async()=>{
+ const f=$("jsonFile").files[0];if(!f){alert("Önce JSON dosyası seç.");return}
+ try{
+  const count=importCatalog(JSON.parse(await f.text()));
+  alert(count+" içerik eklendi.");
+ }catch(e){alert("Katalog okunamadı: "+e.message)}
+});
+$("exportRepos").addEventListener("click",()=>{
+ const blob=new Blob([JSON.stringify(repos,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="safari-stream-depolar.json";a.click();URL.revokeObjectURL(a.href);
+});
+$("clearData").addEventListener("click",()=>{
+ if(confirm("Depolar, içerikler, favoriler ve geçmiş silinecek. Emin misin?")){
+  ["ss_items","ss_repos","ss_favorites","ss_history"].forEach(k=>localStorage.removeItem(k));
+  items=[];repos=[];favorites=[];history=[];$("player").removeAttribute("src");render();
+ }
 });
 render();
 </script>
