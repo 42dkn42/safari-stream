@@ -5,86 +5,98 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#101018">
-<title>MRC Plus Web</title>
+<title>MRC Plus 2.0</title>
 <style>
-:root{--bg:#101018;--panel:#1b1b27;--panel2:#242434;--text:#f5f5fa;--muted:#a5a5b5;--red:#e63955;--line:#333344}
+:root{--bg:#101018;--panel:#1b1b27;--panel2:#272738;--red:#e63955;--text:#f5f5fa;--muted:#a5a5b5;--line:#343447}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-header{position:sticky;top:0;z-index:5;background:#101018ee;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 16px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:23px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--red)}
-button{border:0;border-radius:12px;padding:11px 14px;background:var(--panel2);color:white;font-weight:700;font-size:14px;cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:#101018ed;backdrop-filter:blur(15px);padding:14px 16px;border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--red)}
+button{background:var(--panel2);color:white;border:0;border-radius:11px;padding:11px 13px;font-weight:700;font-size:13px}
 button.primary{background:var(--red)}
-button:active{opacity:.75}
-.search{margin-top:13px;width:100%;padding:14px 15px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:white;font-size:16px;outline:none}
-nav{display:flex;gap:8px;overflow:auto;padding:13px 15px;scrollbar-width:none}
+button:active{opacity:.7}
+input,select,textarea{font:inherit}
+.search{width:100%;margin-top:13px;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--panel);color:white;font-size:16px;outline:none}
+nav{display:flex;gap:8px;padding:12px 15px;overflow:auto;scrollbar-width:none}
 nav button{white-space:nowrap;color:var(--muted)}
 nav button.active{background:var(--red);color:white}
-main{padding:4px 15px 110px;max-width:1100px;margin:auto}
-.heading{display:flex;justify-content:space-between;align-items:center;margin:15px 0}
-.heading h2{font-size:19px;margin:0}
+main{max-width:1100px;margin:auto;padding:3px 15px 110px}
+.hero{background:linear-gradient(120deg,#42202f,#24233b);border-radius:18px;padding:20px;margin:12px 0 20px}
+.hero small{color:#ffb7c3;font-weight:800;letter-spacing:1px}
+.hero h1{font-size:25px;margin:9px 0}
+.hero p{color:#ddd;font-size:13px;line-height:1.5;margin:0 0 14px}
+.heading{display:flex;justify-content:space-between;align-items:center;margin:18px 0 13px}
+.heading h2{font-size:18px;margin:0}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .item{min-width:0;cursor:pointer}
-.poster{width:100%;aspect-ratio:2/3;border-radius:13px;overflow:hidden;background:linear-gradient(145deg,#35354a,#171725);position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px}
-.poster img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.poster .placeholder{font-size:15px;font-weight:800;line-height:1.3}
-.tag{position:absolute;left:6px;top:6px;background:#000b;padding:5px 7px;border-radius:7px;font-size:10px}
+.poster{aspect-ratio:2/3;background:linear-gradient(145deg,#37374b,#171725);border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px}
+.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.poster .placeholder{font-size:14px;font-weight:800;line-height:1.3;overflow-wrap:anywhere}
+.tag{position:absolute;top:6px;left:6px;background:#000b;border-radius:6px;padding:5px 7px;font-size:9px}
 .item h3{font-size:13px;margin:8px 1px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item small{color:var(--muted);font-size:11px}
-.empty{padding:35px 15px;text-align:center;color:var(--muted);grid-column:1/-1}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#15151fee;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 5px calc(10px + env(safe-area-inset-bottom));z-index:6}
-.bottom button{background:none;color:var(--muted);font-size:12px;padding:7px}
+.item small{font-size:11px;color:var(--muted)}
+.empty{grid-column:1/-1;text-align:center;padding:35px 10px;color:var(--muted)}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:6;display:flex;justify-content:space-around;background:#15151fee;backdrop-filter:blur(15px);border-top:1px solid var(--line);padding:9px 3px calc(9px + env(safe-area-inset-bottom))}
+.bottom button{background:none;color:var(--muted);font-size:11px;padding:7px}
 .bottom button.active{color:white}
-.modal{display:none;position:fixed;inset:0;background:#000d;z-index:10;overflow:auto;padding:18px}
+.modal{display:none;position:fixed;inset:0;background:#000d;z-index:10;overflow:auto;padding:15px}
 .modal.show{display:block}
-.sheet{max-width:650px;margin:25px auto;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px}
-.close{float:right;background:var(--panel2);font-size:18px;padding:7px 12px}
-.detailposter{width:115px;aspect-ratio:2/3;object-fit:cover;border-radius:12px;background:#333}
-.detailtop{display:flex;gap:15px;margin:20px 0}
-.detailtop h2{margin:4px 0 8px}
-.muted{color:var(--muted);font-size:13px;line-height:1.5}
-.field{display:block;width:100%;padding:13px;margin:9px 0 14px;border:1px solid var(--line);border-radius:11px;background:#11111a;color:white;font-size:15px}
-label{font-size:13px;color:#c9c9d5}
-textarea.field{min-height:85px;resize:vertical}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.sheet{max-width:650px;margin:25px auto;background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:17px}
+.close{float:right;padding:7px 11px;font-size:18px}
+.field{display:block;width:100%;padding:12px;margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:#11111a;color:white}
+label{font-size:12px;color:#ccc}
+.detailtop{display:flex;gap:14px;margin:22px 0 14px}
+.detailposter{width:110px;min-width:110px;aspect-ratio:2/3;object-fit:cover;border-radius:11px;background:#333}
+.detailtop h2{margin:2px 0 7px;font-size:21px}
+.muted{color:var(--muted);font-size:13px;line-height:1.55}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+hr{border:0;border-top:1px solid var(--line);margin:17px 0}
 .player{width:100%;background:#000;border-radius:12px;margin-top:12px;max-height:55vh}
-hr{border:0;border-top:1px solid var(--line);margin:16px 0}
-.notice{background:#292333;border-radius:12px;padding:12px;color:#d8d3e4;font-size:12px;line-height:1.5}
-@media(min-width:650px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}.poster{border-radius:16px}}
+.notice{background:#292333;padding:12px;border-radius:11px;color:#d8d3e4;font-size:12px;line-height:1.5;margin-top:20px}
+.source{background:var(--panel2);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:8px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
  <div class="top">
   <div class="logo">MRC <span>PLUS</span></div>
-  <button class="primary" onclick="openAdd()">＋ İçerik ekle</button>
+  <button class="primary" onclick="openAdd()">＋ Ekle</button>
  </div>
- <input id="search" class="search" placeholder="Film, dizi veya içerik ara..." oninput="render()">
+ <input id="search" class="search" placeholder="Film, dizi veya tür ara..." oninput="render()">
 </header>
 
 <nav id="filters">
- <button class="active" data-filter="all" onclick="setFilter('all',this)">Tümü</button>
- <button data-filter="movie" onclick="setFilter('movie',this)">Filmler</button>
- <button data-filter="series" onclick="setFilter('series',this)">Diziler</button>
- <button data-filter="fav" onclick="setFilter('fav',this)">Favorilerim</button>
+ <button class="active" data-filter="all" onclick="setFilter('all')">Tümü</button>
+ <button data-filter="movie" onclick="setFilter('movie')">Filmler</button>
+ <button data-filter="series" onclick="setFilter('series')">Diziler</button>
+ <button data-filter="fav" onclick="setFilter('fav')">Favoriler</button>
+ <button data-filter="history" onclick="setFilter('history')">Geçmiş</button>
 </nav>
 
 <main>
+ <section class="hero">
+  <small>MRC PLUS WEB 2.0</small>
+  <h1>Film ve dizi dünyana hoş geldin.</h1>
+  <p>Kendi kataloğunu oluştur, kaynaklarını yönet ve Safari uyumlu videolarını oynat.</p>
+  <button class="primary" onclick="openAdd()">İçerik eklemeye başla</button>
+ </section>
  <div class="heading">
   <h2 id="sectionTitle">Keşfet</h2>
   <span class="muted" id="count"></span>
  </div>
  <div class="grid" id="catalog"></div>
- <div class="notice" style="margin-top:25px">
-  MRC Plus Web: Bu uygulama bir katalog ve oynatıcı arayüzüdür. Video izlemek için size ait veya kullanımına izin verilen, Safari ile uyumlu MP4/HLS adresi ekleyin. Android CloudStream eklentileri burada doğrudan çalışmaz.
+ <div class="notice">
+  Bu uygulama katalog yönetimi ve video oynatıcıdır. CloudStream .cs3 eklentilerini çalıştırmaz. İzleme için doğrudan erişebildiğiniz ve kullanımına izin verilen MP4/HLS adresleri gerekir.
  </div>
 </main>
 
 <div class="bottom">
- <button class="active" onclick="setFilter('all',null)">⌂<br>Keşfet</button>
- <button onclick="setFilter('movie',null)">▣<br>Filmler</button>
- <button onclick="setFilter('series',null)">▤<br>Diziler</button>
- <button onclick="setFilter('fav',null)">♡<br>Favoriler</button>
+ <button class="active" onclick="setFilter('all')">⌂<br>Keşfet</button>
+ <button onclick="setFilter('movie')">▣<br>Filmler</button>
+ <button onclick="setFilter('series')">▤<br>Diziler</button>
+ <button onclick="setFilter('fav')">♡<br>Favoriler</button>
 </div>
 
 <div class="modal" id="detailModal">
@@ -97,22 +109,23 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="modal" id="addModal">
  <div class="sheet">
   <button class="close" onclick="closeModal('addModal')">✕</button>
-  <h2>Yeni içerik ekle</h2>
+  <h2>Yeni içerik</h2>
   <label>İçerik adı</label>
-  <input class="field" id="newTitle" placeholder="Film veya dizi adı">
-  <label>Tür</label>
-  <select class="field" id="newType">
-   <option value="movie">Film</option>
-   <option value="series">Dizi</option>
+  <input id="title" class="field" placeholder="Film veya dizi adı">
+  <label>İçerik türü</label>
+  <select id="type" class="field">
+   <option value="movie">Film</option><option value="series">Dizi</option>
   </select>
   <label>Yıl</label>
-  <input class="field" id="newYear" placeholder="2026" type="number">
-  <label>Afiş görseli bağlantısı (isteğe bağlı)</label>
-  <input class="field" id="newPoster" placeholder="https://...">
+  <input id="year" class="field" type="number" placeholder="2026">
+  <label>Kategori / Tür</label>
+  <input id="genre" class="field" placeholder="Aksiyon, dram, komedi...">
+  <label>Afiş adresi</label>
+  <input id="poster" class="field" placeholder="https://...">
   <label>Açıklama</label>
-  <textarea class="field" id="newDesc" placeholder="İçerik hakkında açıklama..."></textarea>
-  <label>Video adresi (MP4 veya Safari uyumlu HLS)</label>
-  <input class="field" id="newVideo" placeholder="https://.../video.m3u8 veya video.mp4">
+  <textarea id="description" class="field" placeholder="İçerik açıklaması..."></textarea>
+  <label>Video adresi (MP4 / HLS)</label>
+  <input id="video" class="field" placeholder="https://...">
   <button class="primary" style="width:100%" onclick="saveNew()">Kaydet</button>
  </div>
 </div>
@@ -120,144 +133,148 @@ hr{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="modal" id="playerModal">
  <div class="sheet">
   <button class="close" onclick="stopPlayer()">✕</button>
-  <h2 id="playerTitle">Video oynatıcı</h2>
-  <video id="video" class="player" controls playsinline webkit-playsinline></video>
-  <p class="muted">Video açılmazsa bağlantının doğrudan MP4 veya Safari uyumlu HLS (.m3u8) olduğundan emin olun.</p>
+  <h2 id="playerTitle">Oynatıcı</h2>
+  <video id="player" class="player" controls playsinline webkit-playsinline></video>
+  <p class="muted">Oynatma için Safari uyumlu doğrudan video adresi gerekir.</p>
+ </div>
+</div>
+
+<div class="modal" id="importModal">
+ <div class="sheet">
+  <button class="close" onclick="closeModal('importModal')">✕</button>
+  <h2>Katalog içe aktar</h2>
+  <p class="muted">JSON biçimindeki kendi içerik kataloğunuzu buraya yapıştırabilirsiniz.</p>
+  <textarea id="importText" class="field" rows="9" placeholder='[{"title":"Örnek","type":"movie","year":2026}]'></textarea>
+  <button class="primary" style="width:100%" onclick="importCatalog()">Kataloğu içe aktar</button>
+  <hr>
+  <button style="width:100%" onclick="exportCatalog()">Kataloğu dışa aktar</button>
  </div>
 </div>
 
 <script>
-const demo = [
- {id:1,title:"Örnek Film",type:"movie",year:2025,description:"Kendi film kataloğunuzu oluşturmak için örnek içerik. Bu kayıt gerçek bir yayın bağlantısı içermez.",poster:"",video:"",episodes:[]},
- {id:2,title:"Örnek Dizi",type:"series",year:2026,description:"Dizi kayıtlarınızı ve bölümlerinizi ekleyebileceğiniz örnek içerik.",poster:"",video:"",episodes:[]}
-];
-let items=JSON.parse(localStorage.getItem("mrc_items")||"null")||demo;
-let favorites=JSON.parse(localStorage.getItem("mrc_favs")||"[]");
+const KEY="mrcplus20_items",FKEY="mrcplus20_favs",HKEY="mrcplus20_history";
+let items=JSON.parse(localStorage.getItem(KEY)||"[]");
+let favorites=JSON.parse(localStorage.getItem(FKEY)||"[]");
+let history=JSON.parse(localStorage.getItem(HKEY)||"[]");
 let filter="all";
 
-function persist(){
- localStorage.setItem("mrc_items",JSON.stringify(items));
- localStorage.setItem("mrc_favs",JSON.stringify(favorites));
+function save(){
+ localStorage.setItem(KEY,JSON.stringify(items));
+ localStorage.setItem(FKEY,JSON.stringify(favorites));
+ localStorage.setItem(HKEY,JSON.stringify(history));
 }
-function setFilter(f,btn){
+function setFilter(f){
  filter=f;
  document.querySelectorAll("#filters button").forEach(b=>b.classList.toggle("active",b.dataset.filter===f));
- document.getElementById("sectionTitle").textContent={all:"Keşfet",movie:"Filmler",series:"Diziler",fav:"Favorilerim"}[f];
+ document.getElementById("sectionTitle").textContent={all:"Keşfet",movie:"Filmler",series:"Diziler",fav:"Favoriler",history:"İzleme geçmişi"}[f];
  render();
 }
 function render(){
  const q=document.getElementById("search").value.toLocaleLowerCase("tr");
  let list=items.filter(x=>{
-  const match=(x.title+" "+(x.description||"")).toLocaleLowerCase("tr").includes(q);
-  const type=filter==="all"||(filter==="fav"?favorites.includes(x.id):x.type===filter);
+  const match=(x.title+" "+(x.description||"")+" "+(x.genre||"")).toLocaleLowerCase("tr").includes(q);
+  const type=filter==="all"||(filter==="fav"?favorites.includes(x.id):filter==="history"?history.includes(x.id):x.type===filter);
   return match&&type;
  });
  document.getElementById("count").textContent=list.length+" içerik";
- const grid=document.getElementById("catalog");
- grid.innerHTML="";
- if(!list.length){grid.innerHTML='<div class="empty">İçerik bulunamadı.</div>';return;}
+ const grid=document.getElementById("catalog");grid.innerHTML="";
+ if(!list.length){grid.innerHTML='<div class="empty">Henüz içerik yok. “＋ Ekle” ile kataloğunu oluşturabilirsin.</div>';return;}
  list.forEach(x=>{
-  const el=document.createElement("div");
-  el.className="item";
-  const poster=document.createElement("div");
-  poster.className="poster";
+  const el=document.createElement("div");el.className="item";
+  const poster=document.createElement("div");poster.className="poster";
   if(x.poster){
-   const img=document.createElement("img");
-   img.src=x.poster;img.alt=x.title;
-   img.onerror=()=>img.remove();
-   poster.appendChild(img);
+   const img=document.createElement("img");img.src=x.poster;img.alt=x.title;img.onerror=()=>img.remove();poster.appendChild(img);
   }
-  const ph=document.createElement("div");
-  ph.className="placeholder";ph.textContent=x.title;
-  poster.appendChild(ph);
-  const tag=document.createElement("span");
-  tag.className="tag";tag.textContent=x.type==="movie"?"FİLM":"DİZİ";
-  poster.appendChild(tag);
-  const title=document.createElement("h3");title.textContent=x.title;
-  const year=document.createElement("small");year.textContent=x.year||"";
-  el.append(poster,title,year);
-  el.onclick=()=>showDetail(x.id);
-  grid.appendChild(el);
+  const ph=document.createElement("div");ph.className="placeholder";ph.textContent=x.title;poster.appendChild(ph);
+  const tag=document.createElement("span");tag.className="tag";tag.textContent=x.type==="movie"?"FİLM":"DİZİ";poster.appendChild(tag);
+  const h=document.createElement("h3");h.textContent=x.title;
+  const small=document.createElement("small");small.textContent=[x.year,x.genre].filter(Boolean).join(" • ");
+  el.append(poster,h,small);el.onclick=()=>showDetail(x.id);grid.appendChild(el);
  });
 }
 function showDetail(id){
  const x=items.find(a=>a.id===id);if(!x)return;
- const c=document.getElementById("detailContent");
- c.innerHTML="";
+ const c=document.getElementById("detailContent");c.innerHTML="";
  const top=document.createElement("div");top.className="detailtop";
  const img=document.createElement("img");img.className="detailposter";img.src=x.poster||"";img.alt=x.title;
  const info=document.createElement("div");
  const h=document.createElement("h2");h.textContent=x.title;
- const meta=document.createElement("div");meta.className="muted";meta.textContent=(x.type==="movie"?"Film":"Dizi")+" • "+(x.year||"");
+ const meta=document.createElement("div");meta.className="muted";meta.textContent=[x.type==="movie"?"Film":"Dizi",x.year,x.genre].filter(Boolean).join(" • ");
  const desc=document.createElement("p");desc.className="muted";desc.textContent=x.description||"Açıklama eklenmemiş.";
  info.append(h,meta,desc);top.append(img,info);c.append(top);
  const actions=document.createElement("div");actions.className="actions";
- const fav=document.createElement("button");
- fav.textContent=favorites.includes(id)?"♥ Favorilerden çıkar":"♡ Favorilere ekle";
- fav.onclick=()=>{favorites.includes(id)?favorites=favorites.filter(a=>a!==id):favorites.push(id);persist();showDetail(id);render();};
+ const fav=document.createElement("button");fav.textContent=favorites.includes(id)?"♥ Favorilerden çıkar":"♡ Favorilere ekle";
+ fav.onclick=()=>{favorites.includes(id)?favorites=favorites.filter(a=>a!==id):favorites.push(id);save();showDetail(id);render();};
  actions.append(fav);
- if(x.video){
-  const play=document.createElement("button");play.className="primary";play.textContent="▶ Oynat";
-  play.onclick=()=>playVideo(x.title,x.video);
-  actions.append(play);
+ const edit=document.createElement("button");edit.textContent="Kaynak ekle";edit.onclick=()=>addSource(id);actions.append(edit);
+ const del=document.createElement("button");del.textContent="Sil";del.onclick=()=>{if(confirm("Bu içeriği silmek istiyor musun?")){items=items.filter(a=>a.id!==id);favorites=favorites.filter(a=>a!==id);save();closeModal("detailModal");render();}};actions.append(del);
+ c.append(actions);
+ if(x.video){const b=document.createElement("button");b.className="primary";b.style.width="100%";b.textContent="▶ Oynat";b.onclick=()=>playVideo(x.title,x.video,id);c.append(b);}
+ if(x.sources&&x.sources.length){
+  const hr=document.createElement("hr");c.append(hr);
+  const hh=document.createElement("h3");hh.textContent="Video kaynakları";c.append(hh);
+  x.sources.forEach((s,i)=>{
+   const row=document.createElement("div");row.className="source";
+   const name=document.createElement("span");name.textContent=s.name||("Kaynak "+(i+1));
+   const play=document.createElement("button");play.className="primary";play.textContent="Oynat";play.onclick=()=>playVideo(x.title+" - "+name.textContent,s.url,id);
+   row.append(name,play);c.append(row);
+  });
  }
- const edit=document.createElement("button");edit.textContent="Video adresi ekle";
- edit.onclick=()=>addVideo(id);
- const del=document.createElement("button");del.textContent="İçeriği sil";
- del.onclick=()=>{if(confirm("Bu içeriği silmek istiyor musunuz?")){items=items.filter(a=>a.id!==id);favorites=favorites.filter(a=>a!==id);persist();closeModal("detailModal");render();}};
- actions.append(edit,del);c.append(actions);
  if(x.type==="series"){
   const hr=document.createElement("hr");c.append(hr);
-  const h3=document.createElement("h3");h3.textContent="Bölümler";c.append(h3);
+  const hh=document.createElement("h3");hh.textContent="Bölümler";c.append(hh);
   (x.episodes||[]).forEach((ep,i)=>{
-   const b=document.createElement("button");b.style.display="block";b.style.width="100%";b.style.margin="7px 0";
-   b.textContent=ep.title||("Bölüm "+(i+1));
-   b.onclick=()=>playVideo(x.title+" - "+b.textContent,ep.video);
-   c.append(b);
+   const row=document.createElement("div");row.className="source";
+   const name=document.createElement("span");name.textContent=ep.title||("Bölüm "+(i+1));
+   const play=document.createElement("button");play.textContent="Oynat";play.onclick=()=>playVideo(x.title+" - "+name.textContent,ep.video,id);
+   row.append(name,play);c.append(row);
   });
   const add=document.createElement("button");add.className="primary";add.textContent="+ Bölüm ekle";add.onclick=()=>addEpisode(id);c.append(add);
  }
  document.getElementById("detailModal").classList.add("show");
 }
-function addVideo(id){
- const url=prompt("Doğrudan MP4 veya HLS video adresini girin:");
- if(!url)return;
- if(!validVideo(url)){alert("Lütfen http veya https ile başlayan bir video adresi girin.");return;}
- const x=items.find(a=>a.id===id);x.video=url;persist();showDetail(id);
+function validUrl(s){try{let u=new URL(s);return u.protocol==="https:"||u.protocol==="http:";}catch(e){return false;}}
+function addSource(id){
+ const name=prompt("Kaynak adı:");if(!name)return;
+ const url=prompt("Doğrudan MP4 veya HLS adresi:");if(!url)return;
+ if(!validUrl(url)){alert("Geçerli bir http/https adresi gir.");return;}
+ const x=items.find(a=>a.id===id);x.sources=x.sources||[];x.sources.push({name,url});save();showDetail(id);
 }
 function addEpisode(id){
  const title=prompt("Bölüm adı:");if(!title)return;
- const video=prompt("Bölümün MP4 veya HLS video adresi:");if(!video)return;
- if(!validVideo(video)){alert("Geçerli bir http/https adresi girin.");return;}
- const x=items.find(a=>a.id===id);x.episodes=x.episodes||[];x.episodes.push({title,video});persist();showDetail(id);
+ const video=prompt("Bölüm video adresi:");if(!video)return;
+ if(!validUrl(video)){alert("Geçerli bir adres gir.");return;}
+ const x=items.find(a=>a.id===id);x.episodes=x.episodes||[];x.episodes.push({title,video});save();showDetail(id);
 }
-function validVideo(url){try{const u=new URL(url);return u.protocol==="https:"||u.protocol==="http:";}catch(e){return false;}}
-function playVideo(title,url){
- if(!validVideo(url)){alert("Video adresi geçerli değil.");return;}
- document.getElementById("playerTitle").textContent=title;
- const v=document.getElementById("video");v.pause();v.src=url;v.load();
- closeModal("detailModal");document.getElementById("playerModal").classList.add("show");
- v.play().catch(()=>{});
+function playVideo(title,url,id){
+ if(!validUrl(url)){alert("Video adresi geçerli değil.");return;}
+ if(id){history=[id,...history.filter(a=>a!==id)].slice(0,50);save();render();}
+ const p=document.getElementById("player");document.getElementById("playerTitle").textContent=title;
+ p.src=url;p.load();closeModal("detailModal");document.getElementById("playerModal").classList.add("show");p.play().catch(()=>{});
 }
-function stopPlayer(){
- const v=document.getElementById("video");v.pause();v.removeAttribute("src");v.load();closeModal("playerModal");
-}
+function stopPlayer(){const p=document.getElementById("player");p.pause();p.removeAttribute("src");p.load();closeModal("playerModal");}
 function openAdd(){document.getElementById("addModal").classList.add("show");}
 function closeModal(id){document.getElementById(id).classList.remove("show");}
 function saveNew(){
- const title=document.getElementById("newTitle").value.trim();
- if(!title){alert("İçerik adını yazın.");return;}
- const video=document.getElementById("newVideo").value.trim();
- if(video&&!validVideo(video)){alert("Video adresi geçerli değil.");return;}
- const poster=document.getElementById("newPoster").value.trim();
- if(poster&&!validVideo(poster)){alert("Afiş adresi geçerli değil.");return;}
- items.unshift({
-  id:Date.now(),title,type:document.getElementById("newType").value,
-  year:document.getElementById("newYear").value,
-  poster,video,description:document.getElementById("newDesc").value.trim(),episodes:[]
- });
- persist();closeModal("addModal");render();
- ["newTitle","newYear","newPoster","newVideo","newDesc"].forEach(id=>document.getElementById(id).value="");
+ const title=document.getElementById("title").value.trim();if(!title){alert("İçerik adı gerekli.");return;}
+ const poster=document.getElementById("poster").value.trim(),video=document.getElementById("video").value.trim();
+ if(poster&&!validUrl(poster)){alert("Afiş adresi geçerli değil.");return;}
+ if(video&&!validUrl(video)){alert("Video adresi geçerli değil.");return;}
+ items.unshift({id:Date.now(),title,type:document.getElementById("type").value,year:document.getElementById("year").value,genre:document.getElementById("genre").value,poster,description:document.getElementById("description").value,video,sources:[],episodes:[]});
+ save();closeModal("addModal");render();
+ ["title","year","genre","poster","description","video"].forEach(id=>document.getElementById(id).value="");
+}
+function importCatalog(){
+ try{
+  const data=JSON.parse(document.getElementById("importText").value);
+  if(!Array.isArray(data))throw Error();
+  const clean=data.filter(x=>x&&typeof x.title==="string").map(x=>({...x,id:Date.now()+Math.random(),type:x.type==="series"?"series":"movie",sources:Array.isArray(x.sources)?x.sources:[],episodes:Array.isArray(x.episodes)?x.episodes:[]}));
+  items=[...clean,...items];save();closeModal("importModal");render();alert(clean.length+" içerik eklendi.");
+ }catch(e){alert("JSON biçimi geçerli değil.");}
+}
+function exportCatalog(){
+ const blob=new Blob([JSON.stringify(items,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="mrc-plus-katalog.json";a.click();URL.revokeObjectURL(url);
 }
 render();
 </script>
