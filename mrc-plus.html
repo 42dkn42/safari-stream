@@ -286,6 +286,7 @@ function exportCatalog(){
  <input id="onlineSearch" class="search" placeholder="Film, dizi veya anime adı...">
  <div class="actions">
   <button class="primary" id="searchShows">Dizi ara</button>
+  <button class="primary" id="searchMovies">Film ara</button>
   <button class="primary" id="searchAnime">Anime ara</button>
  </div>
  <div id="onlineResults" class="grid"></div>
@@ -415,7 +416,33 @@ function exportCatalog(){
  }
 
  section.querySelector("#searchShows").onclick=searchShows;
+
+async function searchMovies(){
+ const q=input.value.trim();
+ if(!q){alert("Aramak istediğin film adını yaz.");return;}
+ results.textContent="Filmler aranıyor...";
+ try{
+  const response=await fetch(
+   "https://api.streamx.qzz.io/search?q="+encodeURIComponent(q)+"&type=movie"
+  );
+  if(!response.ok)throw Error();
+  const data=await response.json();
+  const list=(data.metas||[]).filter(a=>a.type==="movie").map(a=>({
+   title:a.name||"İsimsiz film",
+   type:"movie",
+   year:a.releaseInfo||"",
+   genre:"",
+   poster:a.poster||"",
+   description:""
+  }));
+  showResults(list);
+ }catch(e){
+  results.textContent="Film kataloğuna ulaşılamadı. Daha sonra tekrar dene.";
+ }
+}
+
  section.querySelector("#searchAnime").onclick=searchAnime;
+section.querySelector("#searchMovies").onclick=searchMovies;
 })();
 
 render();
