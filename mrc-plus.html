@@ -73,6 +73,7 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
  <button data-filter="series" onclick="setFilter('series')">Diziler</button>
  <button data-filter="fav" onclick="setFilter('fav')">Favoriler</button>
  <button data-filter="history" onclick="setFilter('history')">Geçmiş</button>
+ <button data-filter="live" onclick="showLive()">Canlı TV</button>
 </nav>
 
 <main>
@@ -139,6 +140,18 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
  </div>
 </div>
 
+<div class="modal" id="liveModal">
+ <div class="sheet">
+  <button class="close" onclick="closeModal('liveModal')">✕</button>
+  <h2>Canlı TV</h2>
+  <p class="muted">Kendi yasal M3U/M3U8 kanal listenizi içe aktarın. Yayın adreslerinin Safari ile uyumlu olması gerekir.</p>
+  <input id="m3uFile" class="field" type="file" accept=".m3u,.m3u8,.txt">
+  <textarea id="m3uText" class="field" rows="5" placeholder="#EXTM3U\n#EXTINF:-1, Kanal adı\nhttps://...m3u8"></textarea>
+  <button class="primary" style="width:100%" onclick="importM3U()">Listeyi içe aktar</button>
+  <input id="channelSearch" class="field" placeholder="Kanal ara..." oninput="renderChannels()">
+  <div id="channelList"></div>
+ </div>
+</div>
 <div class="modal" id="importModal">
  <div class="sheet">
   <button class="close" onclick="closeModal('importModal')">✕</button>
@@ -479,6 +492,58 @@ async function searchMovies(){
  section.querySelector("#searchAnime").onclick=searchAnime;
 section.querySelector("#searchMovies").onclick=searchMovies;
 })();
+
+
+/* Canlı TV M3U yönetimi */
+const LIVEKEY="mrcplus20_live";
+let channels=JSON.parse(localStorage.getItem(LIVEKEY)||"[]");
+function saveChannels(){localStorage.setItem(LIVEKEY,JSON.stringify(channels));}
+function showLive(){document.getElementById("liveModal").classList.add("show");renderChannels();}
+function parseM3U(text){
+ const lines=text.replace(/^\\uFEFF/,"").split(/\\r?\\n/);
+ const out=[];let meta=null;
+ for(const raw of lines){
+  const line=raw.trim();if(!line)continue;
+  if(line.startsWith("#EXTINF")){
+   const name=line.split(",").slice(1).join(",").trim()||"İsimsiz kanal";
+   const group=(line.match(/group-title="([^"]*)"/i)||[])[1]||"Diğer";
+   const logo=(line.match(/tvg-logo="([^"]*)"/i)||[])[1]||"";
+   meta={name,group,logo};
+  }else if(!line.startsWith("#")&&/^https?:\\/\\//i.test(line)){
+   out.push({id:"ch"+Date.now()+Math.random(),name:meta?.name||line,group:meta?.group||"Diğer",logo:meta?.logo||"",url:line});
+   meta=null;
+  }
+ }
+ return out;
+}
+function importM3U(){
+ const text=document.getElementById("m3uText").value.trim();
+ if(!text){alert("Önce M3U metnini yapıştır veya dosya seç.");return;}
+ const added=parseM3U(text);
+ if(!added.length){alert("Geçerli kanal bulunamadı.");return;}
+ const seen=new Set(channels.map(x=>x.url));channels=[...channels,...added.filter(x=>!seen.has(x.url))];
+ saveChannels();document.getElementById("m3uText").value="";renderChannels();
+ alert(added.length+" kanal bulundu; tekrar eden adresler atlandı.");
+}
+document.getElementById("m3uFile").addEventListener("change",async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ document.getElementById("m3uText").value=await file.text();
+});
+function renderChannels(){
+ const host=document.getElementById("channelList");if(!host)return;
+ const q=(document.getElementById("channelSearch")?.value||"").toLocaleLowerCase("tr");
+ host.innerHTML="";
+ const filtered=channels.filter(x=>(x.name+" "+x.group).toLocaleLowerCase("tr").includes(q));
+ if(!filtered.length){host.innerHTML='<p class="muted">Kanal yok. M3U listenizi içe aktarın.</p>';return;}
+ filtered.forEach(ch=>{
+  const row=document.createElement("div");row.className="source";
+  const name=document.createElement("span");name.textContent=ch.group+" · "+ch.name;
+  const actions=document.createElement("div");
+  const play=document.createElement("button");play.className="primary";play.textContent="▶";play.onclick=()=>playVideo(ch.name,ch.url,null);
+  const del=document.createElement("button");del.textContent="Sil";del.onclick=()=>{channels=channels.filter(x=>x.id!==ch.id);saveChannels();renderChannels();};
+  actions.append(play,del);row.append(name,actions);host.append(row);
+ });
+}
 
 render();
 </script>
