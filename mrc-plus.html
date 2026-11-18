@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#101018">
-<title>MRC Plus v6.1</title>
+<title>MRC Plus v7.0</title>
 <style>
 :root{--bg:#101018;--panel:#1b1b27;--panel2:#272738;--red:#e63955;--text:#f5f5fa;--muted:#a5a5b5;--line:#343447}
 *{box-sizing:border-box}
@@ -79,7 +79,7 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
 
 <main>
  <section class="hero">
-  <small>MRC PLUS WEB v6.1</small>
+  <small>MRC PLUS WEB v7.0</small>
   <h1>Film ve dizi dünyana hoş geldin.</h1>
   <p>Kendi kataloğunu oluştur, kaynaklarını yönet ve Safari uyumlu videolarını oynat.</p>
   <button class="primary" onclick="openAdd()">İçerik eklemeye başla</button>
@@ -178,11 +178,11 @@ hr{border:0;border-top:1px solid var(--line);margin:17px 0}
  <div class="sheet">
   <button class="close" onclick="closeModal('cloudRepoModal')">✕</button>
   <h2>CloudStream Depoları</h2>
-  <p class="muted">MRC deposundaki eklentiler canlı olarak listelenir. .cs3 dosyaları Android/CloudStream içindir; Safari bunları çalıştıramaz. Bu ekran depo kataloğunu görüntüler, video kaynağı çözümlemez.</p>
+  <p class="muted">MRC deposundaki eklentiler listelenir. .cs3 dosyaları Android/CloudStream içindir; Safari bunları çalıştıramaz. Buradaki kayıtlar kaynak kataloğudur, çalışır Safari yayın bağlantısı değildir.</p>
   <input id="repoSearch" class="field" placeholder="Eklenti ara..." oninput="renderCloudRepos()">
   <div id="repoStatus" class="muted">Depo yükleniyor…</div>
   <div id="repoList"></div>
-  <div class="notice">Safari’de oynatma için eklentinin kaynak çözümleme mantığının JavaScript’e ayrıca aktarılması gerekir. Her eklenti ayrı ayrı uyarlanmalıdır.</div>
+  <div class="notice">Bu listedeki eklentileri Safari'de çalıştırmak için her birinin kaynak çözümleme kodunun ayrıca ve izinli yayınlarla uyumlu biçimde web teknolojilerine taşınması gerekir. Eklenti sayısı, çalışır yayın kaynağı sayısı anlamına gelmez.</div>
  </div>
 </div>
 
@@ -318,7 +318,12 @@ function playVideo(title,url,id){
  if(!validUrl(url)){alert("Video adresi geçerli değil.");return;}
  if(id){history=[id,...history.filter(a=>a!==id)].slice(0,50);save();render();}
  const p=document.getElementById("player");document.getElementById("playerTitle").textContent=title;
- const status=document.getElementById("playerStatus");if(status)status.textContent="Yayın yükleniyor…";p.onerror=()=>{if(status)status.textContent="Bu dosya Safari tarafından oynatılamadı veya yayın erişime kapalı. Başka bir kaynak deneyin.";};p.src=url;p.load();closeModal("detailModal");document.getElementById("playerModal").classList.add("show");p.play().catch(()=>{if(status)status.textContent="Oynatmak için oynat düğmesine dokunun. Yayın başlamazsa kaynak bu cihazla uyumlu olmayabilir.";});
+ const status=document.getElementById("playerStatus");
+ if(status)status.textContent=/\\.m3u8(?:$|[?#])/i.test(url)?"HLS yayını Safari'de açılıyor…":"Video yükleniyor…";
+ p.onerror=()=>{if(status)status.textContent="Safari bu yayını oynatamadı. Adresin doğrudan MP4/HLS olması, erişilebilir olması ve yayın sunucusunun gerekli izinleri vermesi gerekir.";};
+ p.onloadedmetadata=()=>{if(status)status.textContent="Yayın yüklendi. İyi seyirler.";};
+ p.src=url;p.load();closeModal("detailModal");document.getElementById("playerModal").classList.add("show");
+ p.play().catch(()=>{if(status)status.textContent="Safari otomatik oynatmayı engelledi. Video üzerindeki oynat düğmesine dokun.";});
 }
 function stopPlayer(){const p=document.getElementById("player");p.pause();p.removeAttribute("src");p.load();closeModal("playerModal");}
 function openAdd(){document.getElementById("addModal").classList.add("show");}
@@ -354,12 +359,12 @@ function exportCatalog(){
  <input id="onlineSearch" class="search" placeholder="Film, dizi veya anime adı...">
  <div class="actions">
   <button class="primary" id="searchShows">Dizi ara</button>
-  <button class="primary" id="searchMovies">Film ara</button>
+  <button class="primary" id="searchMovies">Yasal film ara</button>
   <button class="primary" id="searchAnime">Anime ara</button>
   <button id="searchArchive">Ücretsiz yasal filmler</button>
  </div>
  <div id="onlineResults" class="grid"></div>
- <p class="muted">Dizi/anime araması katalog bilgisi sağlar. Ücretsiz yasal arşiv bölümündeki uygun lisanslı filmler doğrudan oynatılabilir.</p>`;
+ <p class="muted">Film araması kamu malı/CC0 lisanslı ve MP4 dosyası doğrulanan Internet Archive kayıtlarını gösterir. Dizi ve anime araması bilgi/afiş/bölüm kataloğudur; tek başına yayın hakkı veya oynatma bağlantısı sağlamaz.</p>`;
  main.insertBefore(section,main.querySelector(".notice"));
 
  const input=section.querySelector("#onlineSearch");
@@ -489,27 +494,8 @@ function exportCatalog(){
  section.querySelector("#searchShows").onclick=searchShows;
 
 async function searchMovies(){
- const q=input.value.trim();
- if(!q){alert("Aramak istediğin film adını yaz.");return;}
- results.textContent="Filmler aranıyor...";
- try{
-  const response=await fetch(
-   "https://api.streamx.qzz.io/search?q="+encodeURIComponent(q)+"&type=movie"
-  );
-  if(!response.ok)throw Error();
-  const data=await response.json();
-  const list=(data.metas||[]).filter(a=>a.type==="movie").map(a=>({
-   title:a.name||"İsimsiz film",
-   type:"movie",
-   year:a.releaseInfo||"",
-   genre:"",
-   poster:a.poster||"",
-   description:""
-  }));
-  showResults(list);
- }catch(e){
-  results.textContent="Film kataloğuna ulaşılamadı. Daha sonra tekrar dene.";
- }
+ // Film araması yalnızca açıkça kamu malı/CC0 lisansı ve doğrudan MP4 dosyası doğrulanan arşiv kayıtlarını gösterir.
+ return searchArchive();
 }
 
 
