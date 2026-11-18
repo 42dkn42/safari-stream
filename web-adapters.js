@@ -49,7 +49,7 @@
     if (!a || !a.rights) throw new Error('Bu kaynak için yetki/inceleme onayı bulunmuyor.');
     const result = await a.resolve(item);
     if (!result || !safeUrl(result.url)) throw new Error('Adaptör güvenli HTTPS yayın adresi döndürmedi.');
-    if (!/\\.(mp4|m3u8)(?:$|[?#])/i.test(result.url) && result.type !== 'hls' && result.type !== 'mp4') {
+    if (!/\.(mp4|m3u8)(?:$|[?#])/i.test(result.url) && result.type !== 'hls' && result.type !== 'mp4') {
       throw new Error('Yayın türü Safari için doğrulanamadı.');
     }
     return { url: result.url, type: result.type || '', title: String(result.title || item?.title || 'Video').slice(0, 180), license: String(result.license || '').slice(0, 240) };
